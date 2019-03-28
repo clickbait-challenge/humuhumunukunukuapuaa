@@ -20,8 +20,6 @@ server = CoreNLPServer(
 server.start()
 
 parser = CoreNLPDependencyParser()
-parse = next(parser.raw_parse("I put the book in the box on the table"))
-print(parse)
 
 #head = index of word that a word depends on
 # address = index of word itself
@@ -52,4 +50,4 @@ def get_avg_length_syntactic_dependencies(text):
 
 if __name__ == '__main__':
     print(get_max_length_syntactic_dependencies("I put the book in the box on the table"))
-    server.stop()
+    server.stop() # Important!!!!!
