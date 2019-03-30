@@ -1,4 +1,5 @@
 data/small
 data/large
+data/*.jar
 .ipynb_checkpoints/
 __pycache__/
