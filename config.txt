@@ -1,8 +1,12 @@
 {
-	"SMALL_DATA_FOLDER": "",
-	"SMALL_DATA_FILE": "",
-	"SMALL_TARGETS_FILE": "",
-	"LARGE_DATA_FOLDER": "",
-	"LARGE_DATA_FILE": "",
-	"LARGE_TARGETS_FILE": ""
+	"SMALL_DATA_FOLDER": "small",
+	"SMALL_DATA_FILE": "instances.jsonl",
+	"SMALL_TARGETS_FILE": "truth.jsonl",
+	"LARGE_DATA_FOLDER": "large",
+	"LARGE_DATA_FILE": "instances.jsonl",
+	"LARGE_TARGETS_FILE": "truth.jsonl",
+	"JAVA_PATH": "D:\\Program Files\\Java\\jdk1.8.0_191\\bin\\java.exe",
+	"STANFORD_JAR" : "stanford-corenlp-3.9.2.jar",
+	"STANFORD_MODELS_JAR" : "stanford-corenlp-3.9.2-models.jar",
+	"DOWNWORTHY_FILE" : "Downworthy.txt"
 }
