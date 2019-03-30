@@ -54,14 +54,14 @@ class Logger():
   def get_time(self):
     return dt.strftime(dt.now(), '%Y.%m.%d-%H:%M:%S')
 
-  def get_model_file(self, filename):
-    return os.path.join(self.models_folder, filename)
+  def get_model_file(self, filename, additional_path_to_file = ""):
+    return os.path.join(self.models_folder, additional_path_to_file, filename)
 
-  def get_output_file(self, filename):
-    return os.path.join(self.output_folder, filename)
+  def get_output_file(self, filename, additional_path_to_file = ""):
+    return os.path.join(self.output_folder, additional_path_to_file, filename)
 
-  def get_data_file(self, filename):
-    return os.path.join(self.data_folder, filename)
+  def get_data_file(self, filename, additional_path_to_file = ""):
+    return os.path.join(self.data_folder, additional_path_to_file, filename)
 
   def get_time_prefix(self):
     return dt.strftime(dt.now(), '%Y-%m-%d_%H_%M_%S')
