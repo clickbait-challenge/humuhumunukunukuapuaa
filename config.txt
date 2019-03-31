@@ -8,5 +8,7 @@
 	"JAVA_PATH": "D:\\Program Files\\Java\\jdk1.8.0_191\\bin\\java.exe",
 	"STANFORD_JAR" : "stanford-corenlp-3.9.2.jar",
 	"STANFORD_MODELS_JAR" : "stanford-corenlp-3.9.2-models.jar",
-	"DOWNWORTHY_FILE" : "Downworthy.txt"
+	"DOWNWORTHY_FILE" : "Downworthy.txt",
+	"GLOVE_FILE": "glove.twitter.27B.100d.txt",
+	"EMB_SIZE": "100"
 }
