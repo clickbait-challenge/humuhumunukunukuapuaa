@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
   logger = Logger(show = True, html_output = True, config_file = "config.txt")
   small_dataset = generate_data("small", logger)  
-  small_df = generate_training_data(small_dataset[:15], "small_train.csv", logger)
+  small_df = generate_training_data(small_dataset, "small_train.csv", logger)
   
   '''
   large_dataset = generate_data(logger.config_dict[''], logger.config_dict[''])

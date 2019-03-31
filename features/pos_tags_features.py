@@ -21,7 +21,6 @@ class POSTagFeatures():
     self.tagger = self.core_nlp.create_pos_tagger()
     
 
-
   def _compute_using_server(self, text):
     
     self.words = list(self.parser.tokenize(text))
