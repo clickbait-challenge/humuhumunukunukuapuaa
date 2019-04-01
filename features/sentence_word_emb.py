@@ -37,7 +37,7 @@ class GloVeFeatures():
         sentence_emb.append(word_emb)
 
     if sentence_emb == []:
-      sentence_emb = np.zeros(self.logger.config_dict['EMB_SIZE'])
+      return [-1 for i in range(len(self.colnames))]
     else:
       sentence_emb = np.array(sentence_emb)
 
