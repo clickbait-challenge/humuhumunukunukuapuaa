@@ -3,6 +3,7 @@
 const input = __dirname + "/twitter.jsonl";
 const output = __dirname + "/twitter-out.jsonl"+ new Date().toISOString();
 
+global.fetch = require("node-fetch");
 
 const fs = require('fs');
 
@@ -88,14 +89,28 @@ lineReader.on('line', function (line) {
 
 
 
-        parse({html:  data.article, url: data.urlString, _url: data.urlString}).then((result) => {
+        parse({html:  data.article, url: data.urlString, _url: data.urlString}).then(async (result) => {
             let {post} = data;
 
             let postMedia = [];
             if (post.entities.urls) {
-                for (let url in post.entities.urls) {
+                for (let url of post.entities.urls) {
                     if (url.display_url)
                         postMedia.push(url.display_url);
+                }
+            }
+            if (post.extended_entities && post.extended_entities.media) {
+                for (let media of post.extended_entities.media) {
+                    if (media.media_url) {
+                        let imageName = /\/([^\/]*\.(?:png|jpg))$/.exec(media.media_url);
+                        if (imageName) {
+                            imageName = imageName[1];
+                            let res = await fetch(media.media_url);
+
+                            res.body.pipe(fs.createWriteStream(__dirname + '/images/' + imageName));
+                            postMedia.push(imageName);
+                        }
+                    }
                 }
             }
             let finalForm = {
