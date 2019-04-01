@@ -2,7 +2,8 @@
   "name": "crawler",
   "version": "1.0.0",
   "devDependencies": {
-    "twitter": "*"
+    "twitter": "*",
+    "article-parser": "latest"
   },
   "scripts": {}
 }
