@@ -9,10 +9,12 @@ class StanfordCoreNLP():
 
     self.logger = logger
     self.nlp_options = nlp_options
+    '''
     nltk.internals.config_java(bin = logger.config_dict['JAVA_PATH'], 
       options = ["-Xmx1024m"])
+    '''
 
-    self._create_server()
+    #self._create_server()
 
 
   def _create_server(self):
@@ -27,22 +29,23 @@ class StanfordCoreNLP():
 
   def create_parser(self):
 
-    self.parser = CoreNLPParser()
+    self.parser = CoreNLPParser(url = 'http://localhost:9000/')
     return self.parser
 
 
   def create_dependency_parser(self):
 
-    self.dep_parser = CoreNLPDependencyParser()
+    self.dep_parser = CoreNLPDependencyParser(url = 'http://localhost:9000/')
     return self.dep_parser
 
 
   def create_pos_tagger(self):
 
-    self.tagger = CoreNLPParser(tagtype = 'pos')
+    self.tagger = CoreNLPParser(tagtype = 'pos', url = 'http://localhost:9000/')
     return self.tagger
 
 
   def close_server(self):
+    pass
 
-    self.server.stop()
+    #self.server.stop()

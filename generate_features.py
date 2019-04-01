@@ -61,8 +61,8 @@ def generate_training_data(dataset, file_to_save, logger):
 if __name__ == '__main__':
 
   logger = Logger(show = True, html_output = True, config_file = "config.txt")
-  small_dataset = generate_data("small", logger)  
-  small_df = generate_training_data(small_dataset, "small_train.csv", logger)
+  large_dataset = generate_data("large", logger)  
+  large_df = generate_training_data(large_dataset, "large_train.csv", logger)
   
   '''
   large_dataset = generate_data(logger.config_dict[''], logger.config_dict[''])
