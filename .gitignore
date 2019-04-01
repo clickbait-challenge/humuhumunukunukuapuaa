@@ -1,0 +1,6 @@
+data/small
+data/large
+data/glove*
+data/*.jar
+.ipynb_checkpoints/
+__pycache__/

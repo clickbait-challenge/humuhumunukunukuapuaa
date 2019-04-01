@@ -1,0 +1,3 @@
+pip install vaderSentiment #vaderSentiment 3.2.1
+
+
