@@ -31,6 +31,9 @@ class SentenceSentimentFeatures():
 
   def compute_features_per_sentence(self, text):
 
+    if len(text) == 0:
+      return [-1 for i in range(len(self.colnames))]
+
     feats  = self._get_vader_scores(text)
     feats += self._get_pos_neg_words_count(text)
 

@@ -13,7 +13,6 @@ class StanfordCoreNLP():
     nltk.internals.config_java(bin = logger.config_dict['JAVA_PATH'], 
       options = ["-Xmx1024m"])
     '''
-
     #self._create_server()
 
 
@@ -47,5 +46,4 @@ class StanfordCoreNLP():
 
   def close_server(self):
     pass
-
     #self.server.stop()

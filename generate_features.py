@@ -10,7 +10,6 @@ import traceback
 from data_preprocess import generate_data
 from logger import Logger
 
-
 pos_extractor = None
 structure_extractor = None
 
