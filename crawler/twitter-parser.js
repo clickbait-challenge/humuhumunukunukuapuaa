@@ -1,7 +1,7 @@
 'use strict';
 
 const input = __dirname + "/twitter.jsonl";
-const output = __dirname + "/twitter-out"+ new Date().toISOString() + ".jsonl";
+const output = (__dirname + "/twitter-out"+ new Date().toISOString() + ".jsonl").replace(':', '_');
 
 global.fetch = require("node-fetch");
 
