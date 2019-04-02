@@ -1,0 +1,22 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.02-09:01:27] Start reading data file from data\custom\twitter-out-2019-04-01T14_03_12.749Z.jsonl ...
+[2019.04.02-09:01:27] Finish reading [0.05s]
+[2019.04.02-09:01:27] Start reading targets file from data\custom\truth.jsonl ...
+[2019.04.02-09:01:27] Finish reading [0.00s]
+[2019.04.02-09:01:27] Init POS feats extractor with feats list: ['Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs']
+[2019.04.02-09:01:27] Init sentence sentiment feats extractor with feats list: ['VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg']
+[2019.04.02-09:01:27] Init sentence structure feats extractor with feats list: ['WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg']
+[2019.04.02-09:01:27] Start loading GloVe Twitter pretrained word embeddings ...
+[2019.04.02-09:02:15] Finished loading GloVe [47.37s]
+[2019.04.02-09:02:15] Init sentence emb average extractor with 100 dims
+[2019.04.02-09:02:15] Start calculating features ...
+[2019.04.02-09:03:10] Finish calculating 115 features for 206 entries [55.05s]
+[2019.04.02-09:03:10] Features dataframe snippet 
+                     ID  Prop_Nouns  Advb_Determ  PerPos_Pronouns  Past3rdSing_Verbs  VaderS_Neg  VaderS_Neu  VaderS_Pos    ...       EMB_93    EMB_94    EMB_95    EMB_96    EMB_97    EMB_98    EMB_99   EMB_100
+0  1112512436018528256    0.200000     0.000000         0.000000           0.100000       0.256       0.744       0.000    ...    -0.118332  0.026948 -0.073877  0.107233  0.267184  0.270463  0.039266 -0.122507
+1  1112436930589978624    0.166667     0.055556         0.055556           0.055556       0.000       0.843       0.157    ...    -0.058042 -0.062075  0.094879 -0.017259  0.125529 -0.045528  0.225605 -0.251925
+2  1111366505105682432    0.384615     0.153846         0.000000           0.000000       0.000       0.813       0.187    ...    -0.224738  0.007345 -0.087008  0.073588 -0.279054  0.131220 -0.011319  0.117672
+3  1112662422651838464    0.000000     0.062500         0.125000           0.000000       0.082       0.743       0.175    ...     0.156457 -0.028090  0.046696 -0.141982 -0.004796 -0.059933  0.259642 -0.162233
+4  1111074697846968320    0.071429     0.071429         0.071429           0.000000       0.000       1.000       0.000    ...    -0.008362 -0.064779 -0.017166 -0.079375  0.022880 -0.038799  0.195679  0.078581
+
+[5 rows x 116 columns]
+[2019.04.02-09:03:10] Save features to data\custom_train.csv
