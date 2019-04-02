@@ -1,0 +1,19 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.02-14:54:26] Start reading data file from data\small\instances.jsonl ...
+[2019.04.02-14:54:26] Finish reading [0.08s]
+[2019.04.02-14:54:26] Start reading targets file from data\small\truth.jsonl ...
+[2019.04.02-14:54:26] Finish reading [0.02s]
+[2019.04.02-14:54:26] Dropping ID column from one dataframe
+[2019.04.02-14:54:26] Concatenate dataframes
+[2019.04.02-14:54:26] Add target column
+[2019.04.02-14:54:26] Final dataframe snippet 
+    PostTitleWordsNumber  PostTitleCharsNumber  ...  Click_Bait                  ID
+0                    13                    75  ...           0  608310377143799810
+1                    14                    98  ...           0  609297109095972864
+2                    12                    89  ...           1  609504474621612032
+3                    11                    62  ...           0  609748367049105409
+4                    16                    91  ...           1  608688782821453825
+
+[5 rows x 132 columns]
+[2019.04.02-14:54:26] Start hyperparameter random grid-search for AdaBoostClassifier
+[2019.04.02-14:56:47] Hyperparameter random grid-search done [140.80s]
+[2019.04.02-14:56:47] Best params are {'random_state': 13, 'n_estimators': 200, 'learning_rate': 1, 'base_estimator__splitter': 'random', 'base_estimator__min_samples_split': 20, 'base_estimator__min_samples_leaf': 8, 'base_estimator__max_features': None, 'base_estimator__max_depth': 15, 'base_estimator__criterion': 'gini'}

@@ -1,0 +1,23 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.01-15:43:14] Start reading data file from data\large\instances.jsonl ...
+[2019.04.01-15:43:15] Finish reading [0.62s]
+[2019.04.01-15:43:15] Start reading targets file from data\large\instances.jsonl ...
+[2019.04.01-15:43:15] Finish reading [0.11s]
+[2019.04.01-15:43:15] Init POS feats extractor with feats list: ['Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs']
+[2019.04.01-15:43:15] Init sentence sentiment feats extractor with feats list: ['VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg']
+[2019.04.01-15:43:15] Init sentence structure feats extractor with feats list: ['WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg']
+[2019.04.01-15:43:15] Start loading GloVe Twitter pretrained word embeddings ...
+[2019.04.01-15:43:54] Finished loading GloVe [39.04s]
+[2019.04.01-15:43:54] Init sentence emb average extractor with 100 dims
+[2019.04.01-15:43:54] Start calculating features ...
+[2019.04.01-15:44:49] Error generated at 
+[2019.04.01-15:44:49] Finish calculating 115 features for 261 entries [0.00s]
+[2019.04.01-15:44:49] Features dataframe snippet 
+                    ID  Prop_Nouns  Advb_Determ  PerPos_Pronouns    ...       EMB_97    EMB_98    EMB_99   EMB_100
+0  858462320779026433    0.076923     0.000000         0.000000    ...    -0.013887 -0.027600  0.207068 -0.115237
+1  858421020331560960    0.000000     0.333333         0.000000    ...     0.251193  0.128177  0.204785 -0.281418
+2  858368123753435136    0.277778     0.111111         0.055556    ...     0.049943 -0.053671  0.146807 -0.026415
+3  858323428260139008    0.000000     0.250000         0.000000    ...     0.189873 -0.263843  0.436228  0.034001
+4  858283602626347008    0.117647     0.058824         0.000000    ...    -0.163336 -0.058975  0.044349 -0.050632
+
+[5 rows x 116 columns]
+[2019.04.01-15:44:49] Save features to data\large_train.csv
