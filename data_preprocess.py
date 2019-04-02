@@ -22,7 +22,7 @@ def generate_data(config_data_prefix, logger):
   targets = []
   targets_filename = logger.get_data_file(logger.config_dict[targets_key], 
     logger.config_dict[folder_key])
-  logger.log("Start reading targets file from {} ...".format(data_filename))
+  logger.log("Start reading targets file from {} ...".format(targets_filename))
   targets_file = open(targets_filename, mode = "r", encoding = "utf8")
   for line in targets_file:
     targets.append(json.loads(line))
