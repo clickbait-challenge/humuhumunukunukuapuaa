@@ -1,0 +1,19 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.02-14:59:11] Start reading data file from data\small\instances.jsonl ...
+[2019.04.02-14:59:11] Finish reading [0.09s]
+[2019.04.02-14:59:11] Start reading targets file from data\small\truth.jsonl ...
+[2019.04.02-14:59:11] Finish reading [0.02s]
+[2019.04.02-14:59:11] Dropping ID column from one dataframe
+[2019.04.02-14:59:11] Concatenate dataframes
+[2019.04.02-14:59:11] Add target column
+[2019.04.02-14:59:11] Final dataframe snippet 
+    PostTitleWordsNumber  PostTitleCharsNumber  ...  Click_Bait                  ID
+0                    13                    75  ...           0  608310377143799810
+1                    14                    98  ...           0  609297109095972864
+2                    12                    89  ...           1  609504474621612032
+3                    11                    62  ...           0  609748367049105409
+4                    16                    91  ...           1  608688782821453825
+
+[5 rows x 132 columns]
+[2019.04.02-14:59:11] Start hyperparameter random grid-search for RandomForestClassifier
+[2019.04.02-15:00:58] Hyperparameter random grid-search done [106.74s]
+[2019.04.02-15:00:58] Best params are {'random_state': 13, 'n_estimators': 100, 'min_samples_split': 10, 'min_samples_leaf': 4, 'max_features': None, 'max_depth': 6, 'criterion': 'entropy', 'bootstrap': True}

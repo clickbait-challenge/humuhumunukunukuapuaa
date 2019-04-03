@@ -1,5 +1,6 @@
 data/small
 data/large
+data/custom
 data/glove*
 data/*.jar
 .ipynb_checkpoints/

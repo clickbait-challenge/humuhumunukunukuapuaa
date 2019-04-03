@@ -13,7 +13,10 @@ class SentenceStructureFeatures():
     self.words = None
     self.colnames = ["WordLen_Avg", "Start_Digit", "Num_StopW", 
       "CBait_Phrase", "Synt_DepMax", "Synt_DepAvg"]
-    self.logger.log("Init sentence structure feats extractor with feats list: {}".format(self.colnames))
+    self.logger.log("Init sentence structure feats extractor with feats list: {}".format(
+      self.colnames))
+    self._core_nlp_server_init()
+
 
   def _core_nlp_server_init(self):
 
@@ -81,7 +84,9 @@ class SentenceStructureFeatures():
 
   def compute_features_per_sentence(self, text):
 
-    self._core_nlp_server_init()
+    if len(text) == 0:
+      return [-1 for i in range(len(self.colnames))]
+
     self._compute_using_server(text)
     feats  = self._get_average_word_length(text)
     feats += self._get_start_digit(text)
@@ -89,7 +94,6 @@ class SentenceStructureFeatures():
     feats += self._get_common_bit_phrase(text)
     feats += self._get_max_length_syntactic_dependencies(text)
     feats += self._get_avg_length_syntactic_dependencies(text)
-    self.core_nlp.close_server()
 
     return feats
 
@@ -100,5 +104,7 @@ class SentenceStructureFeatures():
 
 
   def end_computing_features(self):
+
+    self.core_nlp.close_server()
     
     return self.colnames

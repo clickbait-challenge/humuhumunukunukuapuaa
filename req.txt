@@ -1,3 +1,4 @@
 pip install vaderSentiment #vaderSentiment 3.2.1
+conda install -c anaconda py-xgboost #xgboost 0.8.0 
 
 

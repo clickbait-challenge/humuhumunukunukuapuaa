@@ -1,0 +1,19 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.02-15:03:47] Start reading data file from data\small\instances.jsonl ...
+[2019.04.02-15:03:47] Finish reading [0.08s]
+[2019.04.02-15:03:47] Start reading targets file from data\small\truth.jsonl ...
+[2019.04.02-15:03:47] Finish reading [0.00s]
+[2019.04.02-15:03:47] Dropping ID column from one dataframe
+[2019.04.02-15:03:47] Concatenate dataframes
+[2019.04.02-15:03:47] Add target column
+[2019.04.02-15:03:47] Final dataframe snippet 
+    PostTitleWordsNumber  PostTitleCharsNumber  ...  Click_Bait                  ID
+0                    13                    75  ...           0  608310377143799810
+1                    14                    98  ...           0  609297109095972864
+2                    12                    89  ...           1  609504474621612032
+3                    11                    62  ...           0  609748367049105409
+4                    16                    91  ...           1  608688782821453825
+
+[5 rows x 132 columns]
+[2019.04.02-15:03:47] Start hyperparameter random grid-search for XGBClassifier
+[2019.04.02-15:04:05] Hyperparameter random grid-search done [18.04s]
+[2019.04.02-15:04:05] Best params are {'subsample': 0.6, 'reg_alpha': 1, 'random_state': 13, 'n_estimators': 100, 'min_child_weight': 5, 'max_depth': 5, 'learning_rate': 0.05, 'gamma': 0.1, 'colsample_bytree': 0.9}

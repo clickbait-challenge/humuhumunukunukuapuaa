@@ -25,8 +25,10 @@ class GloVeFeatures():
 
   def compute_features_per_sentence(self, text):
 
-    words = [word.lower() for word in word_tokenize(text)]
+    if len(text) == 0:
+      return [-1 for i in range(len(self.colnames))]
 
+    words = [word.lower() for word in word_tokenize(text)]
 
     sentence_emb = []
     for word in words:
@@ -35,7 +37,7 @@ class GloVeFeatures():
         sentence_emb.append(word_emb)
 
     if sentence_emb == []:
-      sentence_emb = np.zeros(logger.config_dict['EMB_SIZE'])
+      return [-1 for i in range(len(self.colnames))]
     else:
       sentence_emb = np.array(sentence_emb)
 
