@@ -1,15 +1,15 @@
 'use strict';
 
-const input = __dirname + "/twitter.jsonl";
-const output = (__dirname + "/twitter-out"+ new Date().toISOString() + ".jsonl").replace(':', '_');
+const input = __dirname + "/twitter-30-cont2.jsonl";
+const output = (__dirname + "/twitter-out"+ new Date().toISOString() + ".jsonl").replace(/:/g, '_');
 
+console.log(output);
 global.fetch = require("node-fetch");
 
 const fs = require('fs');
 
-const lineReader = require('readline').createInterface({
-    input: fs.createReadStream(input)
-});
+const inputs = ["twitterBkp.jsonl", "twitter_wtf.jsonl", "twitter-30-cont2.jsonl", "twitter-30-cont.jsonl", "twitter-out_3.jsonl", "twitter_7.jsonl", "twitter.jsonl", "twitter-30-cont123.jsonl"];
+
 
 let writeQueue = [];
 let writing = false;
@@ -38,6 +38,8 @@ function _write() {
     })
 }
 
+const processed = new Set();
+
 
 // hack it
 const parse = require('article-parser/src/parsers');
@@ -47,11 +49,18 @@ let multiple = 0, single = 0, none = 0;
 process.on("exit", function () {
     console.log({multiple,single, none});
 });
-lineReader.on('line', function (line) {
-    var data = JSON.parse(line);
+
+function handler(line) {
+    try {
+        var data = JSON.parse(line);
+    } catch (e) {
+        console.error("Unable to convert a line");
+        console.error(e);
+    }
 
 
-    if (data.article) {
+    if (data.article && !processed.has(data.post.id_str)) {
+        processed.add(data.post.id_str);
         if (data.post.__multiple)
             multiple++;
         else single++;
@@ -90,47 +99,55 @@ lineReader.on('line', function (line) {
 
 
         parse({html:  data.article, url: data.urlString, _url: data.urlString}).then(async (result) => {
-            let {post} = data;
+                let {post} = data;
 
-            let postMedia = [];
-            if (post.entities.urls) {
-                for (let url of post.entities.urls) {
-                    if (url.display_url)
-                        postMedia.push(url.display_url);
-                }
-            }
-            if (post.extended_entities && post.extended_entities.media) {
-                for (let media of post.extended_entities.media) {
-                    if (media.media_url) {
-                        let imageName = /\/([^\/]*\.(?:png|jpg))$/.exec(media.media_url);
-                        if (imageName) {
-                            imageName = imageName[1];
-                            let res = await fetch(media.media_url);
+                let postMedia = [];
+                if (post.entities.urls) {
+                    for (let url of post.entities.urls) {
+                        if (url.display_url) {
+                            let imageName = /\/([^\/]*\.(?:png|jpg))$/.exec(url.display_url);
+                            if (imageName) {
+                                imageName = imageName[1];
+                                let res = await fetch(url.display_url);
 
-                            res.body.pipe(fs.createWriteStream(__dirname + '/images/' + imageName));
-                            postMedia.push(imageName);
+                                res.body.pipe(fs.createWriteStream(__dirname + '/images/' + imageName));
+                                postMedia.push(imageName);
+                            }
                         }
                     }
                 }
-            }
-            let finalForm = {
-                "id": post.id_str,
-                postTimestamp: post.created_at,
-                "postText": [
-                    post.text
-                ],
-                postMedia,
-                "targetTitle": result.title,
-                "targetDescription": result.description,
-                "targetKeywords": null,
-                "targetParagraphs": paragraphs,
-                // "targetCaptions": titles
-                "targetCaptions": []
-            };
+                if (post.extended_entities && post.extended_entities.media) {
+                    for (let media of post.extended_entities.media) {
+                        if (media.media_url) {
+                            let imageName = /\/([^\/]*\.(?:png|jpg))$/.exec(media.media_url);
+                            if (imageName) {
+                                imageName = imageName[1];
+                                let res = await fetch(media.media_url);
 
-            write(finalForm);
-        }
-    );
+                                res.body.pipe(fs.createWriteStream(__dirname + '/images/' + imageName));
+                                postMedia.push(imageName);
+                            }
+                        }
+                    }
+                }
+                let finalForm = {
+                    "id": post.id_str,
+                    postTimestamp: post.created_at,
+                    "postText": [
+                        post.text
+                    ],
+                    postMedia,
+                    "targetTitle": result.title,
+                    "targetDescription": result.description,
+                    "targetKeywords": null,
+                    "targetParagraphs": paragraphs,
+                    // "targetCaptions": titles
+                    "targetCaptions": []
+                };
+
+                write(finalForm);
+            }
+        );
     }
     else none++;
 
@@ -138,4 +155,21 @@ lineReader.on('line', function (line) {
     // const cheerio = require('cheerio');
 
 
-});
+}
+
+
+
+function next() {
+    let input = inputs.shift();
+    if (input) {
+        console.log("Next input " + input);
+
+        let lineReader = require('readline').createInterface({
+            input: fs.createReadStream(input)
+        });
+        lineReader.on('line', handler);
+        lineReader.on("close", next);
+    }
+}
+
+next();

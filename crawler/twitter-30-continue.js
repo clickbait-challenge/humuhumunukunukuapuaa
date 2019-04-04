@@ -2,7 +2,7 @@
 
 global.fetch = require("node-fetch");
 
-
+const solved = new Set();
 const cheerio = require('cheerio');
 const Twitter = require('twitter');
 const hashtags = ["savedyouaclick", "clickbait"].map(e => "#" + e);
@@ -18,6 +18,8 @@ const sleep = (milliseconds) => {
 };
 
 const processed = new Set();
+
+const maxHash = new Map();
 
 
 let writeQueue = [];
@@ -35,7 +37,7 @@ function _write() {
     writing = true;
     let data = writeQueue.join('\n') + "\n";
     writeQueue = [];
-    fs.appendFile('./twitter.jsonl', data, 'utf8', function (err) {
+    fs.appendFile('./twitter-30-cont123.jsonl', data, 'utf8', function (err) {
         if (err) {
             console.error('Failed to write');
             console.error(err);
@@ -196,67 +198,6 @@ function processPost(post, tag) {
 }
 
 
-
-async function search(tag, max_id) {
-    let response;
-    try {
-        response = await twitterClient.get("/search/tweets.json", {
-            lang: "en",
-            count: 100,
-            q: tag,
-            max_id,
-            // until: "2019-03-24"
-        });
-    } catch (err) {
-        console.error("Enc error");
-        console.error(err);
-        if (err[0] && err[0].code == 88) {
-            sleep(1000 * 60).then(() => getTweet(id, tag));
-        }
-
-        return;
-    }
-
-    fs.appendFileSync(__dirname + "/save-game.jsonl", JSON.stringify(response));
-
-    if (response.errors && result.errors[0] && response.errors[0].code === 88) {
-        await sleep(1000 * 60);
-        return search(...arguments);
-    }
-
-    let minId = "99999999999999999999999999999999999999999";
-
-    for (let result of response.statuses) {
-        if (result.id < (+minId) ||
-            (result.id === (+minId) && (result.id_str < (+minId)))) {
-            minId = result.id_str;
-        }
-
-        if (result.quoted_status && !result.quoted_status.truncated && !processed.has(result.quoted_status_id_str)) {
-            processed.add(result.quoted_status_id_str);
-            processPost(result.quoted_status, tag);
-        } else {
-            let id = result.in_reply_to_status_id_str || (result.quoted_status && result.quoted_status.id_str);
-            if (id && !processed.has(id)) {
-                processed.add(id);
-                getTweet(id, tag);
-            }
-
-        }
-    }
-
-    console.log(minId);
-
-    if (max_id === minId) {
-        console.log(`Done with ${tag}`);
-        return;
-    }
-
-    await sleep(700);
-    return search(tag, minId);
-}
-
-
 function getTweet(id, tag) {
     twitterClient.get("/statuses/show.json", {
         id
@@ -272,31 +213,58 @@ function getTweet(id, tag) {
                 sleep(1000 * 60).then(() => getTweet(id, tag));
             }
 
+            done(id);
             processPost(result, tag)
         }
     });
 }
 
+const recover = require('readline').createInterface({
+    input: fs.createReadStream(__dirname + "/twitter-30-cont.jsonl")
+});
 
-for (let hashtag of hashtags)
-    search(hashtag);
+recover.on('line', function (line) {
+    var data = JSON.parse(line);
+    let id = data.post.id_str;
 
-//{ "errors": [ { "code": 88, "message": "Rate limit exceeded" } ] }
+    // console.log(data);
+    solved.add(id);
+});
 
-//
-//
-// async function test() {
-//     let r = await fetch('https:\/\/t.co\/eUcSLlrsQH');
-//
-//
-//     let t = await r.text();
-//
-//     console.log(t);
-//
-//     const $ = cheerio.load(t);
-//
-//
-//     console.log(r);
-// }
-//
-// test();
+function done(id) {
+    fs.appendFile("done.txt", id + "\n", function (err) {
+        if (err) {
+            console.error("Error writing files.");
+            console.error(err);
+        }
+
+    });
+}
+
+
+recover.on('close', function () {
+
+    const lineReader = require('readline').createInterface({
+        input: fs.createReadStream(__dirname + "/save-game-30_nice.jsonl")
+    });
+
+    lineReader.on('line', function (line) {
+        var data = JSON.parse(line);
+        for (let result of data.results) {
+            if (!solved.has(result.id_str))
+                if (result.quoted_status && !result.quoted_status.truncated && !processed.has(result.quoted_status_id_str)) {
+                    processed.add(result.quoted_status_id_str);
+                    processPost(result.quoted_status, "unk");
+                } else {
+                    let id = result.in_reply_to_status_id_str || (result.quoted_status && result.quoted_status.id_str);
+                    if (id && !processed.has(id)) {
+                        processed.add(id);
+                        getTweet(id, "unk");
+                    }
+
+                }
+        }
+    });
+});
+
+
