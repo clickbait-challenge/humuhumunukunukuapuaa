@@ -23,7 +23,7 @@ if __name__ == '__main__':
 	X = final_df.iloc[:, :-2].values
 	y = final_df.iloc[:, -2].values
 
-	X_train, X_valid, y_valid, y_valid = train_test_split(X, y, random_state = 13, 
+	X_train, X_valid, y_train, y_valid = train_test_split(X, y, random_state = 13, 
 		test_size = 0.1)
 
 	valid_data = {'X': X_valid, 'y': y_valid}

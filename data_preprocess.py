@@ -44,7 +44,7 @@ def generate_final_training_dataset(config_data_prefix, logger):
   dataset = generate_data(config_data_prefix, logger)
 
   ids_list = [str(elem['id']) for elem in dataset]
-  scores_list = [int(elem['clickBaitScore'] > 0.5) for elem in dataset]
+  scores_list = [float(elem['clickBaitScore']) for elem in dataset]
 
   original_df   = pd.read_csv(logger.get_data_file(config_data_prefix + "_original.csv"))
   additional_df = pd.read_csv(logger.get_data_file(config_data_prefix + "_train.csv")) 
@@ -52,13 +52,16 @@ def generate_final_training_dataset(config_data_prefix, logger):
   logger.log("Dropping ID column from one dataframe")
   original_df.drop('id', inplace = True, axis = 1)
   additional_df.drop('ID', inplace = True, axis = 1)
+  #additional_df.drop(['EMB_' + str(i) for i in range(1, 101)], axis = 1)
+
 
   logger.log("Concatenate dataframes")
-  final_df = pd.concat([original_df, additional_df], axis = 1)
+  #final_df = pd.concat([original_df, additional_df], axis = 1)
+  final_df = additional_df
   logger.log("Add target column")
   final_df['Click_Bait'] = np.array(scores_list)
   final_df['ID'] = np.array(ids_list)
   logger.log("Final dataframe snippet \n {}".format(final_df.head()))
-  
+
   return final_df
 

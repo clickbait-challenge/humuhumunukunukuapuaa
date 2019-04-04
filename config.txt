@@ -13,5 +13,13 @@
 	"STANFORD_MODELS_JAR" : "stanford-corenlp-3.9.2-models.jar",
 	"DOWNWORTHY_FILE" : "Downworthy.txt",
 	"GLOVE_FILE": "glove.twitter.27B.100d.txt",
-	"EMB_SIZE": "100"
+	"EMB_SIZE": "100",
+	"BEST_ADA_S": "AdaBoostClassifier_params_2019-04-02_14_56_47.json",
+	"BEST_RANDF_S": "RandomForestClassifier_params_2019-04-02_15_00_58.json",
+	"BEST_DECT_S": "DecisionTreeClassifier_params_2019-04-02_15_03_12.json",
+	"BEST_XGB_S": "XGBClassifier_params_2019-04-02_15_04_05.json",
+	"BEST_ADA_L": "AdaBoostClassifier_params_2019-04-02_16_07_29.json",
+	"BEST_RANDF_L": "RandomForestClassifier_params_2019-04-02_17_24_10.json",
+	"BEST_DECT_L": "DecisionTreeClassifier_params_2019-04-02_17_28_48.json",
+	"BEST_XGB_L": "XGBClassifier_params_2019-04-02_17_36_44.json"	
 }
