@@ -66,7 +66,7 @@ ada_hyperparams_grid = {'n_estimators' : n_estimators,
 
 learning_rate = [0.01, 0.05, 0.1, 0.3, 1]
 n_estimators = list(range(100, 600, 100))
-max_depth = list(range(3, 2, 21))
+max_depth = list(range(3, 12, 2))
 min_child_weight = list(range(1, 6, 2))
 gamma = [i/10.0 for i in range(0, 6)]
 subsample = [i/10.0 for i in range(6, 11)]

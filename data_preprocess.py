@@ -44,7 +44,7 @@ def generate_final_training_dataset(config_data_prefix, logger):
   dataset = generate_data(config_data_prefix, logger)
 
   ids_list = [str(elem['id']) for elem in dataset]
-  scores_list = [int(float(elem['clickBaitScore']) > 0.5) for elem in dataset]
+  scores_list = [float(elem['clickBaitScore']) for elem in dataset]
 
   original_df   = pd.read_csv(logger.get_data_file(config_data_prefix + "_original.csv"))
   additional_df = pd.read_csv(logger.get_data_file(config_data_prefix + "_train.csv")) 
@@ -60,6 +60,7 @@ def generate_final_training_dataset(config_data_prefix, logger):
   logger.log("Add target column")
   final_df['Click_Bait'] = np.array(scores_list)
   final_df['ID'] = np.array(ids_list)
+  logger.log("Feature cols {}".format([elem[:10] + ".." for elem in final_df.columns[:-2]]))
   logger.log("Final dataframe snippet \n {}".format(final_df.head()))
 
   return final_df
