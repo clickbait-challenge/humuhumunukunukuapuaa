@@ -39,6 +39,7 @@ def generate_training_data(dataset, file_to_save, logger):
     logger.log("Error generated at {}".format(row['postText'][-1]))
     pos_extractor.core_nlp.close_server()
     structure_extractor.core_nlp.close_server()
+    exit(-1)
   
   logger.log("Finish calculating {} features for {} entries".format(
     len(features_list[-1]) -1, len(features_list)), show_time = True)
@@ -59,7 +60,7 @@ def generate_training_data(dataset, file_to_save, logger):
 
 
 # "small", "large", "custom"
-DATA_TYPE = "custom"
+DATA_TYPE = "large"
 
 if __name__ == '__main__':
 

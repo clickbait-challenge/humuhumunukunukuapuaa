@@ -44,21 +44,23 @@ def plot_tsne(reduced_2d_array, scores, logger):
 if __name__ == '__main__':
 
 	logger = Logger(show = True, html_output = True, config_file = "config.txt")
-	dataset = generate_data("large", logger)
+	dataset = generate_data("small", logger)
 
 	scores = [elem['clickBaitScore'] for elem in dataset]
 	emb_colnames = ["EMB_" + str(i) for i in range(1, 101)]
 
-	df = pd.read_csv(logger.get_data_file("large_train.csv"))
+	df = pd.read_csv(logger.get_data_file("small_train.csv"))
 	original_array = df[emb_colnames].values.tolist()
 
-	#new_array = compute_tsne(original_array, logger)
+	new_array = compute_tsne(original_array, logger)
+	'''
 	new_array = np.load(logger.get_output_file("TSNE_2019-04-04_03_16_50.npy"))
 	new_array = new_array.tolist()
+	'''
 
-	tmp = zip(new_array, scores)
+	#tmp = zip(new_array, scores)
 	#tmp = [(arr, s) for arr, s in tmp if s > 0.9]
 
-	new_array, scores = zip(*tmp)
+	#new_array, scores = zip(*tmp)
 
 	plot_tsne(new_array, scores, logger)

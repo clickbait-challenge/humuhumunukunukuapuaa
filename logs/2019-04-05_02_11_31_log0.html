@@ -1,0 +1,27 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.05-02:11:31] Start reading data file from data\large\instances.jsonl ...
+[2019.04.05-02:11:31] Finish reading [0.78s]
+[2019.04.05-02:11:31] Start reading targets file from data\large\truth.jsonl ...
+[2019.04.05-02:11:32] Finish reading [0.12s]
+[2019.04.05-02:11:32] Dropping ID column from one dataframe
+[2019.04.05-02:11:32] Concatenate dataframes
+[2019.04.05-02:11:32] Add target column
+[2019.04.05-02:11:32] Feature cols ['PostTitleW..', 'PostTitleC..', 'DiffNoWord..', 'DiffNoChar..', 'RatioNoWor..', 'QuestionMa..', 'RatioNoCha..', 'RatioNoCha..', 'RatioNoCha..', 'RatioNoWor..', 'RatioNoWor..', 'DiffCharsP..', 'RatioCharP..', 'FormalWord..', 'RatioNoCha..', 'Prop_Nouns..', 'Advb_Deter..', 'PerPos_Pro..', 'Past3rdSin..', 'VaderS_Neg..', 'VaderS_Neu..', 'VaderS_Pos..', 'Opinion_Po..', 'Opinion_Ne..', 'WordLen_Av..', 'Start_Digi..', 'Num_StopW..', 'CBait_Phra..', 'Synt_DepMa..', 'Synt_DepAv..', 'EMB_1..', 'EMB_2..', 'EMB_3..', 'EMB_4..', 'EMB_5..', 'EMB_6..', 'EMB_7..', 'EMB_8..', 'EMB_9..', 'EMB_10..', 'EMB_11..', 'EMB_12..', 'EMB_13..', 'EMB_14..', 'EMB_15..', 'EMB_16..', 'EMB_17..', 'EMB_18..', 'EMB_19..', 'EMB_20..', 'EMB_21..', 'EMB_22..', 'EMB_23..', 'EMB_24..', 'EMB_25..', 'EMB_26..', 'EMB_27..', 'EMB_28..', 'EMB_29..', 'EMB_30..', 'EMB_31..', 'EMB_32..', 'EMB_33..', 'EMB_34..', 'EMB_35..', 'EMB_36..', 'EMB_37..', 'EMB_38..', 'EMB_39..', 'EMB_40..', 'EMB_41..', 'EMB_42..', 'EMB_43..', 'EMB_44..', 'EMB_45..', 'EMB_46..', 'EMB_47..', 'EMB_48..', 'EMB_49..', 'EMB_50..', 'EMB_51..', 'EMB_52..', 'EMB_53..', 'EMB_54..', 'EMB_55..', 'EMB_56..', 'EMB_57..', 'EMB_58..', 'EMB_59..', 'EMB_60..', 'EMB_61..', 'EMB_62..', 'EMB_63..', 'EMB_64..', 'EMB_65..', 'EMB_66..', 'EMB_67..', 'EMB_68..', 'EMB_69..', 'EMB_70..', 'EMB_71..', 'EMB_72..', 'EMB_73..', 'EMB_74..', 'EMB_75..', 'EMB_76..', 'EMB_77..', 'EMB_78..', 'EMB_79..', 'EMB_80..', 'EMB_81..', 'EMB_82..', 'EMB_83..', 'EMB_84..', 'EMB_85..', 'EMB_86..', 'EMB_87..', 'EMB_88..', 'EMB_89..', 'EMB_90..', 'EMB_91..', 'EMB_92..', 'EMB_93..', 'EMB_94..', 'EMB_95..', 'EMB_96..', 'EMB_97..', 'EMB_98..', 'EMB_99..', 'EMB_100..']
+[2019.04.05-02:11:32] Final dataframe snippet 
+    PostTitleWordsNumber  PostTitleCharsNumber         ...          Click_Bait                  ID
+0                    12                    79         ...            1.000000  858462320779026433
+1                     3                    12         ...            0.133333  858421020331560960
+2                    15                    89         ...            0.400000  858368123753435136
+3                     7                    36         ...            0.266667  858323428260139008
+4                    16                    92         ...            0.000000  858283602626347008
+
+[5 rows x 132 columns]
+[2019.04.05-02:11:33] Splitting data in 15630 train / 3908 test
+[2019.04.05-02:11:33] Train has 3797 clickBaits
+[2019.04.05-02:11:33] Test has 943 clickBaits
+[2019.04.05-02:11:33] Assign 4 weight to clickBaits
+[2019.04.05-02:11:33] Start training AdaBoostClassifier with {'base_estimator__max_depth': 9, 'n_estimators': 100, 'base_estimator__min_samples_leaf': 3, 'base_estimator__min_samples_split': 5, 'random_state': 13}
+[2019.04.05-02:14:16] Finish training [163.24s]
+[2019.04.05-02:14:16] Precision 0.2281303602058319
+[2019.04.05-02:14:16] Recall 0.14103923647932132
+[2019.04.05-02:14:16] F1 0.1743119266055046
+[2019.04.05-02:14:16] MSE 0.09231920019546598
