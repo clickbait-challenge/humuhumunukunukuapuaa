@@ -1,0 +1,1 @@
+{"random_state": 13, "n_estimators": 200, "min_samples_split": 10, "min_samples_leaf": 16, "max_features": "sqrt", "max_depth": null, "criterion": "entropy", "bootstrap": false}
