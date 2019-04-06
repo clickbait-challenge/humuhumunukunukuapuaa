@@ -1,9 +1,9 @@
 criterion = ["gini", "entropy"]
 splitter = ["best", "random"]
-max_depth = list(range(5, 40))
+max_depth = list(range(3, 12))
 max_depth.append(None)
-min_samples_split = [2, 5, 10, 20]
-min_samples_leaf = [1, 2, 4, 8, 16]
+min_samples_split = [2, 3, 4, 5, 10]
+min_samples_leaf = [1, 2, 4, 8]
 max_features = ['log2', 'sqrt', None]
 random_state = [13]
 
@@ -20,9 +20,9 @@ dectree_hyperparams_grid = {'max_depth': max_depth,
 
 n_estimators = list(range(100, 1100, 100))
 max_features = ['log2', 'sqrt', None]
-max_depth = list(range(5, 100))
+max_depth = list(range(5, 12))
 max_depth.append(None)
-min_samples_split = [2, 5, 10, 20, 50]
+min_samples_split = [2, 5, 10, 20]
 min_samples_leaf = [1, 2, 4, 8, 16]
 bootstrap = [True, False]
 criterion = ["gini", "entropy"]
@@ -40,11 +40,11 @@ randf_hyperparams_grid = {'n_estimators': n_estimators,
 
 
 
-n_estimators = list(range(100, 1100, 100))
-learning_rate = [0.01, 0.05, 0.1, 0.3, 1]
+n_estimators = list(range(50, 200, 10))
+learning_rate = [0.001, 0.01, 0.05, 0.1, 0.3, 1]
 base_estimator__criterion = ["gini", "entropy"]
 base_estimator__splitter = ["best", "random"]
-base_estimator__max_depth = list(range(5, 100))
+base_estimator__max_depth = list(range(5, 12))
 base_estimator__max_depth.append(None)
 base_estimator__min_samples_split = [2, 5, 10, 20, 50]
 base_estimator__min_samples_leaf = [1, 2, 4, 8, 16]
@@ -64,11 +64,11 @@ ada_hyperparams_grid = {'n_estimators' : n_estimators,
 
 
 
-learning_rate = [0.01, 0.05, 0.1, 0.3, 1]
-n_estimators = list(range(100, 600, 100))
-max_depth = list(range(3, 12, 2))
-min_child_weight = list(range(1, 6, 2))
-gamma = [i/10.0 for i in range(0, 6)]
+learning_rate = [0.0001, 0.001, 0.01, 0.05, 0.1, 0.3, 1]
+n_estimators = list(range(100, 300, 25))
+max_depth = list(range(5, 12))
+min_child_weight = list(range(1, 7))
+gamma = [i/10.0 for i in range(0, 7)]
 subsample = [i/10.0 for i in range(6, 11)]
 colsample_bytree = [i/10.0 for i in range(6, 11)]
 reg_alpha = [1e-5, 1e-2, 0.1, 1, 100]
