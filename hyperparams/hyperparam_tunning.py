@@ -1,6 +1,9 @@
+import pandas as pd
 import json
 
+
 from sklearn.model_selection import RandomizedSearchCV
+
 
 class HyperparamGridSearcher():
 
@@ -21,8 +24,7 @@ class HyperparamGridSearcher():
       cv = 3, verbose=2, random_state=13, n_jobs = -1, scoring = ['f1', 'roc_auc'],
       refit = 'f1')
 
-    random_grid_search.fit(self.valid_data['X'], self.valid_data['y'], groups = None,
-      {'sample_weight': samples_weights})
+    random_grid_search.fit(self.valid_data['X'], self.valid_data['y'], **{'sample_weight': samples_weights})
     best_params = random_grid_search.best_params_
     best_score = random_grid_search.best_score_
     results = random_grid_search.cv_results_

@@ -3,8 +3,8 @@ from sklearn.tree import DecisionTreeClassifier
 
 from xgboost import XGBClassifier
 
-from hyperparam_tunning import HyperparamGridSearcher
-from hyperparams import *
+from hyperparams.hyperparam_tunning import HyperparamGridSearcher
+from hyperparams.hyperparams import *
 
 from data_preprocess import generate_final_training_dataset
 from logger import Logger
