@@ -60,7 +60,7 @@ def generate_training_data(dataset, file_to_save, logger):
 
 
 # "small", "large", "custom"
-DATA_TYPE = "large"
+DATA_TYPE = "custom"
 
 if __name__ == '__main__':
 
