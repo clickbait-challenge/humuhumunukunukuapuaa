@@ -1,1 +1,0 @@
-{"random_state": 13, "n_estimators": 100, "learning_rate": 0.01, "base_estimator__splitter": "best", "base_estimator__min_samples_split": 20, "base_estimator__min_samples_leaf": 16, "base_estimator__max_features": null, "base_estimator__max_depth": 26, "base_estimator__criterion": "entropy"}
