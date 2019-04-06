@@ -151,13 +151,13 @@ function handler(line) {
 
                 Object.assign(finalForm, {
                     "id": post.id_str,
-                    postTimestamp: post.created_at,
+                    postTimestamp: post.created_at || "",
                     "postText": [
                         post.text
                     ],
-                    "targetTitle": result.title,
-                    "targetDescription": result.description,
-                    "targetParagraphs": paragraphs,
+                    "targetTitle": result.title|| "",
+                    "targetDescription": result.description || "",
+                    "targetParagraphs": paragraphs|| [],
                     // "targetCaptions": titles
                 });
 
