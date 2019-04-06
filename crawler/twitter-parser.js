@@ -1,14 +1,22 @@
 'use strict';
 
 const input = __dirname + "/twitter-30-cont2.jsonl";
-const output = (__dirname + "/twitter-out"+ new Date().toISOString() + ".jsonl").replace(/:/g, '_');
+const cld = require('cld');
+var CLD_OPTIONS = {
+    isHTML: false,
+    languageHint: 'ENGLISH',
+    tldHint: 'en',
+    httpHint: 'en'
+};
+
+const output = (__dirname + "/twitter-out" + new Date().toISOString() + ".jsonl").replace(/:/g, '_');
 
 console.log(output);
 global.fetch = require("node-fetch");
 
 const fs = require('fs');
 
-const inputs = ["twitterBkp.jsonl", "twitter_wtf.jsonl", "twitter-30-cont2.jsonl", "twitter-30-cont.jsonl", "twitter-out_3.jsonl", "twitter_7.jsonl", "twitter.jsonl", "twitter-30-cont123.jsonl"];
+const inputs = ["twitter-reout2019-04-06T10_45_43.680Z.jsonl"];
 
 
 let writeQueue = [];
@@ -47,7 +55,7 @@ const cheerio = require('cheerio');
 
 let multiple = 0, single = 0, none = 0;
 process.on("exit", function () {
-    console.log({multiple,single, none});
+    console.log({multiple, single, none});
 });
 
 function handler(line) {
@@ -96,9 +104,7 @@ function handler(line) {
         // });
 
 
-
-
-        parse({html:  data.article, url: data.urlString, _url: data.urlString}).then(async (result) => {
+        parse({html: data.article, url: data.urlString, _url: data.urlString}).then(async (result) => {
                 let {post} = data;
 
                 let postMedia = [];
@@ -131,32 +137,57 @@ function handler(line) {
                     }
                 }
                 let finalForm = {
+                    "id": [],
+                    postTimestamp: "",
+                    "postText": [],
+                    postMedia,
+                    "targetTitle": "",
+                    "targetDescription": "",
+                    "targetKeywords": "",
+                    "targetParagraphs": paragraphs,
+                    "targetCaptions": []
+                };
+
+                Object.assign(finalForm, {
                     "id": post.id_str,
                     postTimestamp: post.created_at,
                     "postText": [
                         post.text
                     ],
-                    postMedia,
                     "targetTitle": result.title,
                     "targetDescription": result.description,
                     "targetKeywords": null,
                     "targetParagraphs": paragraphs,
                     // "targetCaptions": titles
                     "targetCaptions": []
-                };
+                });
 
-                write(finalForm);
+                let text = paragraphs.join('\n');
+
+                if (text)
+                    cld.detect(text, CLD_OPTIONS, function (err, result) {
+                        if (err) {
+                            console.error("Unable to detect language");
+                            console.error(err);
+                        } else {
+                            if (result.reliable && result.languages[0].code === 'en') {
+                                write(finalForm);
+                            } else {
+                                console.log(`Lang ${JSON.stringify(result)} => ${JSON.stringify(finalForm)}`);
+                            }
+                        }
+                    });
+                else write(finalForm);
+
             }
         );
-    }
-    else none++;
+    } else none++;
 
 
     // const cheerio = require('cheerio');
 
 
 }
-
 
 
 function next() {
