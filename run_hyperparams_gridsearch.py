@@ -33,14 +33,14 @@ if __name__ == '__main__':
 	valid_data = {'X': X_valid, 'y': y_valid}
 	grid_searcher = HyperparamGridSearcher(valid_data, logger)
 
+	classifier = DecisionTreeClassifier()
+	grid_searcher.rand_grid_search(classifier,dectree_hyperparams_grid, 200, DATA_TYPE)
+
 	classifier = AdaBoostClassifier(base_estimator = DecisionTreeClassifier())
 	grid_searcher.rand_grid_search(classifier, ada_hyperparams_grid, 200, DATA_TYPE)
 
-	classifier = RandomForestClassifier(n_jobs = -1)
+	classifier = RandomForestClassifier()
 	grid_searcher.rand_grid_search(classifier, randf_hyperparams_grid, 200, DATA_TYPE)
 
-	classifier = DecisionTreeClassifier()
-	grid_searcher.rand_grid_search(classifier, randf_hyperparams_grid, 200, DATA_TYPE)
-
-	classifier = XGBClassifier(n_jobs = -1)
+	classifier = XGBClassifier()
 	grid_searcher.rand_grid_search(classifier, xgb_hyperparams_grid, 200)

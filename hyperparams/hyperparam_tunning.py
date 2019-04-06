@@ -27,17 +27,17 @@ class HyperparamGridSearcher():
     random_grid_search.fit(self.valid_data['X'], self.valid_data['y'], **{'sample_weight': samples_weights})
     best_params = random_grid_search.best_params_
     best_score = random_grid_search.best_score_
-    results = random_grid_search.cv_results_
-    results.pop('params', None)
-
-    old_pd_max_col = pd.options.display.max_columns
-    pd.set_option('display.max_columns', 50)
-
+    full_results = random_grid_search.cv_results_
+   
+    results = {}
+    results['f1']        = full_results['mean_test_f1']
+    results['auc']       = full_results['mean_test_roc_auc']
+    results['rank_f1']   = full_results['rank_test_f1']
+    results['rank_roc']  = full_results['rank_test_roc_auc']
+  
     self.logger.log("Hyperparameter random grid-search done", show_time = True)
     self.logger.log("Results \n {}".format(pd.DataFrame(results)))
     self.logger.log("Best params are {} with F1: {}".format(best_params, best_score))
-
-    pd.set_option('display.max_columns', old_pd_max_col)
 
     params_filename = type(classifier).__name__ + "_params_" + self.logger.get_time_prefix()
     params_filename += ".json"
