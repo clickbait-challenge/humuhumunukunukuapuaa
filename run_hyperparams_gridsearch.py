@@ -43,4 +43,4 @@ if __name__ == '__main__':
 	grid_searcher.rand_grid_search(classifier, randf_hyperparams_grid, 200, DATA_TYPE)
 
 	classifier = XGBClassifier()
-	grid_searcher.rand_grid_search(classifier, xgb_hyperparams_grid, 200)
+	grid_searcher.rand_grid_search(classifier, xgb_hyperparams_grid, 200, DATA_TYPE)
