@@ -33,6 +33,7 @@ function write(json) {
 function _write() {
     writing = true;
     let data = writeQueue.join('\n') + "\n";
+    data = data.replace(/[^\x00-\x7F]/g, "");
     writeQueue = [];
     fs.appendFile(output, data, 'utf8', function (err) {
         if (err) {
