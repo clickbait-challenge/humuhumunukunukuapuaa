@@ -156,10 +156,8 @@ function handler(line) {
                     ],
                     "targetTitle": result.title,
                     "targetDescription": result.description,
-                    "targetKeywords": null,
                     "targetParagraphs": paragraphs,
                     // "targetCaptions": titles
-                    "targetCaptions": []
                 });
 
                 let text = paragraphs.join('\n');
