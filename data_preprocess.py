@@ -47,7 +47,8 @@ def generate_final_training_dataset(config_data_prefix, logger):
   scores_list = [float(elem['clickBaitScore']) for elem in dataset]
 
   original_df   = pd.read_csv(logger.get_data_file(config_data_prefix + "_original.csv"))
-  additional_df = pd.read_csv(logger.get_data_file(config_data_prefix + "_train.csv")) 
+  additional_df = pd.read_csv(logger.get_data_file(config_data_prefix + "_train.csv"))
+  # TODO Also join Lorena's csv file
 
   logger.log("Dropping ID column from one dataframe")
   original_df.drop('id', inplace = True, axis = 1)
