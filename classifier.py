@@ -5,6 +5,9 @@ from features.sentence_struct_features import SentenceStructureFeatures
 from features.sentence_sentm_features import SentenceSentimentFeatures
 from features.sentence_word_emb import GloVeFeatures
 
+from features.originalFeatures import meld_with_original_features
+from features.originalFeatures import column_names as originalfeatures_name
+
 import argparse, sys
 import pandas as pd
 import pickle as pkl
@@ -35,7 +38,7 @@ def generate_data(path_to_file, logger):
     return data
 
 
-def generate_test_data(data, logger):
+def generate_test_data(data, logger, media_path):
     pos_extractor = POSTagFeatures(logger)
     sentiment_extractor = SentenceSentimentFeatures(logger)
     structure_extractor = SentenceStructureFeatures(logger)
@@ -55,6 +58,8 @@ def generate_test_data(data, logger):
 
         features_list.append(crt_feats)
 
+    meld_with_original_features(data, media_path, features_list)
+
     logger.log("Finish calculating {} features for {} entries".format(
         len(features_list[-1]) - 1, len(features_list)), show_time=True)
 
@@ -63,6 +68,8 @@ def generate_test_data(data, logger):
     colnames += sentiment_extractor.end_computing_features()
     colnames += structure_extractor.end_computing_features()
     colnames += glove_extractor.end_computing_features()
+
+    colnames.extend(originalfeatures_name)
 
     df = pd.DataFrame(features_list, columns=colnames)
 
@@ -92,7 +99,7 @@ if __name__ == '__main__':
 
     data = generate_data(os.path.join(args.input, "instances.jsonl"), logger)
 
-    test_df = generate_test_data(data, logger)
+    test_df = generate_test_data(data, logger, os.path.join(args.input, "media"))
     del data
 
     X_test = test_df.iloc[:, 1:].values

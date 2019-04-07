@@ -1,31 +1,15 @@
-import json
-import os
 from nltk.corpus import words
 
 from nltk.corpus import wordnet
 
-from PIL import Image
 import glob
-import cv2
 
 try:
     from PIL import Image
 except ImportError:
     import Image
-import pytesseract
 import re
 from pandas import DataFrame
-
-import numpy as np
-
-MEDIA_LOCATION = "D:/msc/q3/information retrieval/papers to review/nlp project/train4/custom/media/*"
-
-CWD = os.getcwd()
-JSON_CONFIG_FILE_PATH = '%s/%s' % (CWD, 'instances_modified.jsonl')
-CONFIG_PROPERTIES = {}
-with open(JSON_CONFIG_FILE_PATH, 'r', encoding="utf8") as f:
-    data = [json.loads(line) for line in f]
-
 
 # Helpers:
 
@@ -60,7 +44,7 @@ def read_from_file(filename):
     return list
 
 
-def get_id_data():
+def get_id_data(data, media_location):
     id_data = []
     for i in range(0, len(data)):
         id_data.append(str(data[i]['id']))
@@ -72,7 +56,7 @@ def get_id_data():
 
 # Number of words in post title.
 
-def post_title_words():
+def post_title_words(data, media_location):
     post_title_words_vector = []
     for i in range(0, len(data)):
         post_title_words_vector.append(word_count_function(data[i]['postText'][0]))
@@ -86,7 +70,7 @@ def post_title_words():
 
 # Difference number of words post title and article keywords.
 
-def diff_words_title_keywords():
+def diff_words_title_keywords(data, media_location):
     diff_words_title_keywords_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetKeywords']):
@@ -99,7 +83,7 @@ def diff_words_title_keywords():
 
 # Difference number of characters post title and article keywords
 
-def diff_chars_title_keywords():
+def diff_chars_title_keywords(data, media_location):
     diff_chars_title_keywords_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetKeywords']):
@@ -113,7 +97,7 @@ def diff_chars_title_keywords():
 
 # Ratio number of words article description and post title
 
-def ratio_words_descr_title():
+def ratio_words_descr_title(data, media_location):
     ratio_words_descr_title_vector = []
 
     for i in range(0, len(data)):
@@ -127,7 +111,7 @@ def ratio_words_descr_title():
 
 # Number of question marks in post title
 
-def question_marks_title():
+def question_marks_title(data, media_location):
     question_marks_title_vector = []
     for i in range(0, len(data)):
         question_marks_title_vector.append(data[i]['postText'][0].count('?'))
@@ -136,7 +120,7 @@ def question_marks_title():
 
 # Number of characters in post title
 
-def post_title_chars():
+def post_title_chars(data, media_location):
     post_title_chars_vector = []
     for i in range(0, len(data)):
         post_title_chars_vector.append(character_count_function(data[i]['postText'][0]))
@@ -145,7 +129,7 @@ def post_title_chars():
 
 # Number of characters ratio article paragraphs and post title
 
-def ratio_paragraphs_title():
+def ratio_paragraphs_title(data, media_location):
     ratio_paragraphs_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetParagraphs'] and data[i]['postText'][0]):
@@ -159,7 +143,7 @@ def ratio_paragraphs_title():
 
 # Number of characters ratio article description and post title
 
-def ratio_description_title():
+def ratio_description_title(data, media_location):
     ratio_description_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['postText'][0] and str(data[i]['targetDescription'])):
@@ -175,7 +159,7 @@ def ratio_description_title():
 # Number of characters ratio article paragraphs and article description
 
 
-def ratio_paragraphs_description():
+def ratio_paragraphs_description(data, media_location):
     ratio_paragraphs_description_vector = []
 
     for i in range(0, len(data)):
@@ -191,7 +175,7 @@ def ratio_paragraphs_description():
 # Number of characters ratio article title and post title
 
 
-def ratio_article_title_post_title():
+def ratio_article_title_post_title(data, media_location):
     ratio_article_title_post_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetTitle'] and data[i]['postText'][0]):
@@ -205,7 +189,7 @@ def ratio_article_title_post_title():
 # Number of words ratio article title and post title
 
 
-def ratio_words_article_title_post_title():
+def ratio_words_article_title_post_title(data, media_location):
     ratio_words_article_title_post_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetTitle'] and data[i]['postText'][0]):
@@ -219,7 +203,7 @@ def ratio_words_article_title_post_title():
 # Ratio words in post image and post title
 
 
-def ratio_words_image_title():
+def ratio_words_image_title(data, media_location):
     # preprocess data from file and convert it into int format
     text_image_words_no_str = []
     text_image_words_no = []
@@ -228,8 +212,8 @@ def ratio_words_image_title():
         text_image_words_no.append(int(text_image_words_no_str[0][i]))
     # names of pictures from media (both jpg and png)
     all_files_with_path = glob.glob(
-        MEDIA_LOCATION + ".jpg") + glob.glob(
-        MEDIA_LOCATION + ".png")
+        media_location + ".jpg") + glob.glob(
+        media_location + ".png")
     # find each corresponding image from the dataset
     all_text_image_no = []
     count = 0
@@ -251,7 +235,7 @@ def ratio_words_image_title():
 
 # Difference characters post title and image text
 
-def diff_chars_title_image():
+def diff_chars_title_image(data, media_location):
     # preprocess data from file and convert it into int format
     text_image_words_no_str = []
     text_image_words_no = []
@@ -262,8 +246,8 @@ def diff_chars_title_image():
 
     # names of pictures from media (both jpg and png)
     all_files_with_path = glob.glob(
-        MEDIA_LOCATION + ".jpg") + glob.glob(
-        MEDIA_LOCATION + ".png")
+        media_location + ".jpg") + glob.glob(
+        media_location + ".png")
     # find each corresponding image from the dataset
     all_text_image_no = []
     count = 0
@@ -288,7 +272,7 @@ def diff_chars_title_image():
 
 # ratio characters post image text and post title
 
-def ratio_chars_image_title():
+def ratio_chars_image_title(data, media_location):
     # preprocess data from file and convert it into int format
     text_image_words_no_str = []
     text_image_words_no = []
@@ -297,8 +281,8 @@ def ratio_chars_image_title():
         text_image_words_no.append(int(text_image_words_no_str[0][i]))
     # names of pictures from media (both jpg and png)
     all_files_with_path = glob.glob(
-        MEDIA_LOCATION + ".jpg") + glob.glob(
-        MEDIA_LOCATION + ".png")
+        media_location + ".jpg") + glob.glob(
+        media_location + ".png")
     # find each corresponding image from the dataset
     all_text_image_no = []
     count = 0
@@ -324,7 +308,7 @@ def ratio_chars_image_title():
 
 # check if formal word
 
-def check_formal_words_no():
+def check_formal_words_no(data, media_location):
     # take each post title
 
     formal_words_title_no = []
@@ -345,51 +329,92 @@ def check_formal_words_no():
     return formal_words_title_no
 
 
-# print(check_formal_words_no())
+# # print(check_formal_words_no())
+#
+# print(len(get_id_data()))
+# print(len(post_title_words()))
+# print(len(post_title_chars()))
+# print(len(diff_words_title_keywords()))
+# print(len(diff_chars_title_keywords()))
+# print(len(ratio_words_descr_title()))
+# print(len(question_marks_title()))
+# print(len(ratio_paragraphs_title()))
+# print(len(ratio_article_title_post_title()))
+# print(len(ratio_words_image_title()))
+# print(len(diff_chars_title_image()))
+# print(len(ratio_chars_image_title()))
+# print(len(ratio_paragraphs_description()))
+# # print(len(check_formal_words_no()))
+# print(len(ratio_words_image_title()))
+#
 
-print(len(get_id_data()))
-print(len(post_title_words()))
-print(len(post_title_chars()))
-print(len(diff_words_title_keywords()))
-print(len(diff_chars_title_keywords()))
-print(len(ratio_words_descr_title()))
-print(len(question_marks_title()))
-print(len(ratio_paragraphs_title()))
-print(len(ratio_article_title_post_title()))
-print(len(ratio_words_image_title()))
-print(len(diff_chars_title_image()))
-print(len(ratio_chars_image_title()))
-print(len(ratio_paragraphs_description()))
-# print(len(check_formal_words_no()))
-print(len(ratio_words_image_title()))
+def get_original_features(data, media_location):
+    original_features = [
+        post_title_words(data, media_location),
+        post_title_chars(data, media_location),
+        diff_words_title_keywords(data, media_location),
+        diff_chars_title_keywords(data, media_location),
+        ratio_words_descr_title(data, media_location),
+        question_marks_title(data, media_location),
+        ratio_paragraphs_title(data, media_location),
+        ratio_description_title(data, media_location),
+        ratio_article_title_post_title(data, media_location),
+        ratio_words_article_title_post_title(data, media_location),
+        ratio_words_image_title(data, media_location),
+        diff_chars_title_image(data, media_location),
+        ratio_chars_image_title(data, media_location),
+        check_formal_words_no(data, media_location),
+        ratio_paragraphs_description(data, media_location)
+    ]
 
-original_features = {'id': get_id_data(),
-                     'PostTitleWordsNumber': post_title_words(),
-                     'PostTitleCharsNumber': post_title_chars(),
-                     'DiffNoWordsPostTitleAndKeywords': diff_words_title_keywords(),
-                     'DiffNoCharsPostTitleAndKeywords': diff_chars_title_keywords(),
-                     'RatioNoWordsArticleDescriptionAndPostTitle': ratio_words_descr_title(),
-                     'QuestionMarksNoPostTitle': question_marks_title(),
-                     'RatioNoCharArticleParagraphPostTitle': ratio_paragraphs_title(),
-                     'RatioNoCharArticleDescriptionPostTitle': ratio_description_title(),
-                     'RatioNoCharArticleTitlePostTitle': ratio_article_title_post_title(),
-                     'RatioNoWordsArticleTitlePostTitle': ratio_words_article_title_post_title(),
-                     'RatioNoWordsPostImagePostTitle': ratio_words_image_title(),
-                     'DiffCharsPostTitlePostImage': diff_chars_title_image(),
-                     'RatioCharPostImagePostTitle': ratio_chars_image_title(),
-                     'FormalWordsPostTitle': check_formal_words_no(),
-                     'RatioNoCharArticleParagraphArticleDescription': ratio_paragraphs_description()
-                     }
+    return original_features
 
-df = DataFrame(original_features,
-               columns=['id', 'PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords',
-                        'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle',
-                        'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle',
-                        'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle',
-                        'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle',
-                        'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle',
-                        'RatioNoCharArticleParagraphArticleDescription'])
-print(df)
-export_csv = df.to_csv(
-    r'D:\msc\q3\information retrieval\papers to review\nlp project\train4\custom\originalFeaturesTrainMihai.csv',
-    index=None, header=True)
+
+def meld_with_original_features(data, media_location, store):
+    original_features = get_original_features(data, media_location)
+    for i in range(0, len(store)):
+        container = store[i]
+        for original_features_array in original_features:
+            container.append(original_features_array[i])
+
+
+column_names = ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords',
+                'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle',
+                'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle',
+                'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle',
+                'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle',
+                'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle',
+                'RatioNoCharArticleParagraphArticleDescription']
+
+
+def export():
+    original_features = {'id': get_id_data(),
+                         'PostTitleWordsNumber': post_title_words(),
+                         'PostTitleCharsNumber': post_title_chars(),
+                         'DiffNoWordsPostTitleAndKeywords': diff_words_title_keywords(),
+                         'DiffNoCharsPostTitleAndKeywords': diff_chars_title_keywords(),
+                         'RatioNoWordsArticleDescriptionAndPostTitle': ratio_words_descr_title(),
+                         'QuestionMarksNoPostTitle': question_marks_title(),
+                         'RatioNoCharArticleParagraphPostTitle': ratio_paragraphs_title(),
+                         'RatioNoCharArticleDescriptionPostTitle': ratio_description_title(),
+                         'RatioNoCharArticleTitlePostTitle': ratio_article_title_post_title(),
+                         'RatioNoWordsArticleTitlePostTitle': ratio_words_article_title_post_title(),
+                         'RatioNoWordsPostImagePostTitle': ratio_words_image_title(),
+                         'DiffCharsPostTitlePostImage': diff_chars_title_image(),
+                         'RatioCharPostImagePostTitle': ratio_chars_image_title(),
+                         'FormalWordsPostTitle': check_formal_words_no(),
+                         'RatioNoCharArticleParagraphArticleDescription': ratio_paragraphs_description()
+                         }
+
+    df = DataFrame(original_features,
+                   columns=['id', 'PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords',
+                            'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle',
+                            'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle',
+                            'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle',
+                            'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle',
+                            'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle',
+                            'RatioNoCharArticleParagraphArticleDescription'])
+    print(df)
+    export_csv = df.to_csv(
+        r'D:\msc\q3\information retrieval\papers to review\nlp project\train4\custom\originalFeaturesTrainMihai.csv',
+        index=None, header=True)
