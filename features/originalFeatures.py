@@ -212,8 +212,8 @@ def ratio_words_image_title(data, media_location):
         text_image_words_no.append(int(text_image_words_no_str[0][i]))
     # names of pictures from media (both jpg and png)
     all_files_with_path = glob.glob(
-        media_location + ".jpg") + glob.glob(
-        media_location + ".png")
+        media_location + "/*.jpg") + glob.glob(
+        media_location + "/*.png")
     # find each corresponding image from the dataset
     all_text_image_no = []
     count = 0
@@ -246,8 +246,8 @@ def diff_chars_title_image(data, media_location):
 
     # names of pictures from media (both jpg and png)
     all_files_with_path = glob.glob(
-        media_location + ".jpg") + glob.glob(
-        media_location + ".png")
+        media_location + "/*.jpg") + glob.glob(
+        media_location + "/*.png")
     # find each corresponding image from the dataset
     all_text_image_no = []
     count = 0
@@ -281,8 +281,8 @@ def ratio_chars_image_title(data, media_location):
         text_image_words_no.append(int(text_image_words_no_str[0][i]))
     # names of pictures from media (both jpg and png)
     all_files_with_path = glob.glob(
-        media_location + ".jpg") + glob.glob(
-        media_location + ".png")
+        media_location + "/*.jpg") + glob.glob(
+        media_location + "/*.png")
     # find each corresponding image from the dataset
     all_text_image_no = []
     count = 0
