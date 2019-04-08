@@ -7,6 +7,7 @@ from features.sentence_word_emb import GloVeFeatures
 
 from features.originalFeatures import meld_with_original_features
 from features.originalFeatures import column_names as originalfeatures_name
+from features.text_image_extract import extract_info
 
 import argparse, sys
 import pandas as pd
@@ -58,6 +59,7 @@ def generate_test_data(data, logger, media_path):
 
         features_list.append(crt_feats)
 
+    extract_info(media_path)
     meld_with_original_features(data, media_path, features_list)
 
     logger.log("Finish calculating {} features for {} entries".format(
