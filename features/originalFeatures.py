@@ -44,7 +44,7 @@ def read_from_file(filename):
     return list
 
 
-def get_id_data(data, media_location):
+def get_id_data(data):
     id_data = []
     for i in range(0, len(data)):
         id_data.append(str(data[i]['id']))
@@ -56,7 +56,7 @@ def get_id_data(data, media_location):
 
 # Number of words in post title.
 
-def post_title_words(data, media_location):
+def post_title_words(data):
     post_title_words_vector = []
     for i in range(0, len(data)):
         post_title_words_vector.append(word_count_function(data[i]['postText'][0]))
@@ -70,7 +70,7 @@ def post_title_words(data, media_location):
 
 # Difference number of words post title and article keywords.
 
-def diff_words_title_keywords(data, media_location):
+def diff_words_title_keywords(data):
     diff_words_title_keywords_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetKeywords']):
@@ -83,7 +83,7 @@ def diff_words_title_keywords(data, media_location):
 
 # Difference number of characters post title and article keywords
 
-def diff_chars_title_keywords(data, media_location):
+def diff_chars_title_keywords(data):
     diff_chars_title_keywords_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetKeywords']):
@@ -97,7 +97,7 @@ def diff_chars_title_keywords(data, media_location):
 
 # Ratio number of words article description and post title
 
-def ratio_words_descr_title(data, media_location):
+def ratio_words_descr_title(data):
     ratio_words_descr_title_vector = []
 
     for i in range(0, len(data)):
@@ -111,7 +111,7 @@ def ratio_words_descr_title(data, media_location):
 
 # Number of question marks in post title
 
-def question_marks_title(data, media_location):
+def question_marks_title(data):
     question_marks_title_vector = []
     for i in range(0, len(data)):
         question_marks_title_vector.append(data[i]['postText'][0].count('?'))
@@ -120,7 +120,7 @@ def question_marks_title(data, media_location):
 
 # Number of characters in post title
 
-def post_title_chars(data, media_location):
+def post_title_chars(data):
     post_title_chars_vector = []
     for i in range(0, len(data)):
         post_title_chars_vector.append(character_count_function(data[i]['postText'][0]))
@@ -129,7 +129,7 @@ def post_title_chars(data, media_location):
 
 # Number of characters ratio article paragraphs and post title
 
-def ratio_paragraphs_title(data, media_location):
+def ratio_paragraphs_title(data):
     ratio_paragraphs_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetParagraphs'] and data[i]['postText'][0]):
@@ -143,7 +143,7 @@ def ratio_paragraphs_title(data, media_location):
 
 # Number of characters ratio article description and post title
 
-def ratio_description_title(data, media_location):
+def ratio_description_title(data):
     ratio_description_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['postText'][0] and str(data[i]['targetDescription'])):
@@ -159,7 +159,7 @@ def ratio_description_title(data, media_location):
 # Number of characters ratio article paragraphs and article description
 
 
-def ratio_paragraphs_description(data, media_location):
+def ratio_paragraphs_description(data):
     ratio_paragraphs_description_vector = []
 
     for i in range(0, len(data)):
@@ -175,7 +175,7 @@ def ratio_paragraphs_description(data, media_location):
 # Number of characters ratio article title and post title
 
 
-def ratio_article_title_post_title(data, media_location):
+def ratio_article_title_post_title(data):
     ratio_article_title_post_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetTitle'] and data[i]['postText'][0]):
@@ -189,7 +189,7 @@ def ratio_article_title_post_title(data, media_location):
 # Number of words ratio article title and post title
 
 
-def ratio_words_article_title_post_title(data, media_location):
+def ratio_words_article_title_post_title(data):
     ratio_words_article_title_post_title_vector = []
     for i in range(0, len(data)):
         if (data[i]['targetTitle'] and data[i]['postText'][0]):
@@ -203,65 +203,39 @@ def ratio_words_article_title_post_title(data, media_location):
 # Ratio words in post image and post title
 
 
-def ratio_words_image_title(data, media_location):
-    # preprocess data from file and convert it into int format
-    text_image_words_no_str = []
-    text_image_words_no = []
-    text_image_words_no_str = read_from_file('text_image_words_no.txt')
-    for i in range(0, len(text_image_words_no_str[0])):
-        text_image_words_no.append(int(text_image_words_no_str[0][i]))
-    # names of pictures from media (both jpg and png)
-    all_files_with_path = glob.glob(
-        media_location + "/*.jpg") + glob.glob(
-        media_location + "/*.png")
+def ratio_words_image_title(data, image_meta):
     # find each corresponding image from the dataset
     all_text_image_no = []
-    count = 0
     for i in range(0, len(data)):
-        if (data[i]['postMedia']):
-            for j in range(0, len(all_files_with_path)):
-                if (str(data[i]['postMedia'][0]) in all_files_with_path[j]):
-                    all_text_image_no.append(text_image_words_no[j])
+        postMedia = data[i]['postMedia']
+        if len(postMedia) and postMedia[0] in image_meta:
+            val = image_meta[postMedia[0]]
+
+            all_text_image_no.append(val['word_count'])
         else:
             all_text_image_no.append(0)
-            count = count + 1
     ratio_words_image_title_vector = []
 
     # make ratio
     for i in range(0, len(data)):
-        ratio_words_image_title_vector.append(all_text_image_no[i] / character_count_function(data[i]['postText'][0]))
+        ratio_words_image_title_vector.append(all_text_image_no[i] / word_count_function(data[i]['postText'][0]))
     return ratio_words_image_title_vector
 
 
 # Difference characters post title and image text
 
-def diff_chars_title_image(data, media_location):
-    # preprocess data from file and convert it into int format
-    text_image_words_no_str = []
-    text_image_words_no = []
-    text_image_words_no_str = read_from_file('text_image_words_no.txt')
-
-    for i in range(0, len(text_image_words_no_str[0])):
-        text_image_words_no.append(int(text_image_words_no_str[0][i]))
-
-    # names of pictures from media (both jpg and png)
-    all_files_with_path = glob.glob(
-        media_location + "/*.jpg") + glob.glob(
-        media_location + "/*.png")
-    # find each corresponding image from the dataset
+def diff_chars_title_image(data, image_meta):
     all_text_image_no = []
-    count = 0
 
     for i in range(0, len(data)):
-        if (data[i]['postMedia']):
-            for j in range(0, len(all_files_with_path)):
-                # print(data[i]['postMedia'])
-                # print(data[i]['postMedia'][0])
-                if (str(data[i]['postMedia'][0]) in all_files_with_path[j]):
-                    all_text_image_no.append(text_image_words_no[j])
+        postMedia = data[i]['postMedia']
+        if len(postMedia) and postMedia[0] in image_meta:
+            val = image_meta[postMedia[0]]
+
+            all_text_image_no.append(val['character_count'])
         else:
             all_text_image_no.append(0)
-            count = count + 1
+
     diff_chars_title_image_vector = []
     # make ratio
     for i in range(0, len(data)):
@@ -272,33 +246,22 @@ def diff_chars_title_image(data, media_location):
 
 # ratio characters post image text and post title
 
-def ratio_chars_image_title(data, media_location):
-    # preprocess data from file and convert it into int format
-    text_image_words_no_str = []
-    text_image_words_no = []
-    text_image_words_no_str = read_from_file('text_image_words_no.txt')
-    for i in range(0, len(text_image_words_no_str[0])):
-        text_image_words_no.append(int(text_image_words_no_str[0][i]))
-    # names of pictures from media (both jpg and png)
-    all_files_with_path = glob.glob(
-        media_location + "/*.jpg") + glob.glob(
-        media_location + "/*.png")
-    # find each corresponding image from the dataset
+def ratio_chars_image_title(data, image_meta):
     all_text_image_no = []
-    count = 0
+
     for i in range(0, len(data)):
-        if (data[i]['postMedia']):
-            for j in range(0, len(all_files_with_path)):
-                if (str(data[i]['postMedia'][0]) in all_files_with_path[j]):
-                    all_text_image_no.append(text_image_words_no[j])
+        postMedia = data[i]['postMedia']
+        if len(postMedia) and postMedia[0] in image_meta:
+            val = image_meta[postMedia[0]]
+
+            all_text_image_no.append(val['character_count'])
         else:
             all_text_image_no.append(0)
-            count = count + 1
-    diff_chars_title_image_vector = []
+
     # make ratio chars post image and post title
     ratio_chars_image_title_vector = []
     for i in range(0, len(data)):
-        if (data[i]['postMedia'] and data[i]['postText'][0]):
+        if data[i]['postText'][0]:
             ratio_chars_image_title_vector.append(
                 all_text_image_no[i] / character_count_function(data[i]['postText'][0]))
         else:
@@ -308,7 +271,7 @@ def ratio_chars_image_title(data, media_location):
 
 # check if formal word
 
-def check_formal_words_no(data, media_location):
+def check_formal_words_no(data):
     # take each post title
 
     formal_words_title_no = []
@@ -348,30 +311,30 @@ def check_formal_words_no(data, media_location):
 # print(len(ratio_words_image_title()))
 #
 
-def get_original_features(data, media_location):
+def get_original_features(data, image_meta):
     original_features = [
-        post_title_words(data, media_location),
-        post_title_chars(data, media_location),
-        diff_words_title_keywords(data, media_location),
-        diff_chars_title_keywords(data, media_location),
-        ratio_words_descr_title(data, media_location),
-        question_marks_title(data, media_location),
-        ratio_paragraphs_title(data, media_location),
-        ratio_description_title(data, media_location),
-        ratio_article_title_post_title(data, media_location),
-        ratio_words_article_title_post_title(data, media_location),
-        ratio_words_image_title(data, media_location),
-        diff_chars_title_image(data, media_location),
-        ratio_chars_image_title(data, media_location),
-        check_formal_words_no(data, media_location),
-        ratio_paragraphs_description(data, media_location)
+        post_title_words(data),
+        post_title_chars(data),
+        diff_words_title_keywords(data),
+        diff_chars_title_keywords(data),
+        ratio_words_descr_title(data),
+        question_marks_title(data),
+        ratio_paragraphs_title(data),
+        ratio_description_title(data),
+        ratio_article_title_post_title(data),
+        ratio_words_article_title_post_title(data),
+        ratio_words_image_title(data, image_meta),
+        diff_chars_title_image(data, image_meta),
+        ratio_chars_image_title(data, image_meta),
+        check_formal_words_no(data),
+        ratio_paragraphs_description(data)
     ]
 
     return original_features
 
 
-def meld_with_original_features(data, media_location, store):
-    original_features = get_original_features(data, media_location)
+def meld_with_original_features(data, image_meta, store):
+    original_features = get_original_features(data, image_meta)
     for i in range(0, len(store)):
         container = store[i]
         for original_features_array in original_features:

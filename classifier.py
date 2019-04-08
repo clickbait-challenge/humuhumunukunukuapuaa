@@ -59,8 +59,8 @@ def generate_test_data(data, logger, media_path):
 
         features_list.append(crt_feats)
 
-    extract_info(media_path)
-    meld_with_original_features(data, media_path, features_list)
+    image_meta = extract_info(media_path)
+    meld_with_original_features(data, image_meta, features_list)
 
     logger.log("Finish calculating {} features for {} entries".format(
         len(features_list[-1]) - 1, len(features_list)), show_time=True)
