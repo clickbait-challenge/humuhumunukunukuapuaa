@@ -1,5 +1,7 @@
 pip install vaderSentiment #vaderSentiment 3.2.1
 conda install -c anaconda py-xgboost #xgboost 0.8.0 
 pip install pymagnitude #pymagnitude 0.1.120
+conda install -c mcs07 tesseract  #tesseract 4.1.0rc1
+pip install pytesseract #pytesseract 0.2.6
 
 
