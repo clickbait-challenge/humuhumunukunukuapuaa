@@ -30,11 +30,12 @@ def extract_info(media_file):
     image_text_no_words = []
     image_text_no_chars = []
     for i in range(0, len(all_files_with_path)):
-        if (pytesseract.image_to_string(Image.open(all_files_with_path[i]))):
+        s = pytesseract.image_to_string(Image.open(all_files_with_path[i]))
+        if s:
             image_text_no_words.append(
-                word_count_function(pytesseract.image_to_string(Image.open(all_files_with_path[i]))))
+                word_count_function(s))
             image_text_no_chars.append(
-                character_count_function(pytesseract.image_to_string(Image.open(all_files_with_path[i]))))
+                character_count_function(s))
         else:
             image_text_no_words.append('0')
             image_text_no_chars.append('0')
