@@ -76,7 +76,8 @@ class OriginalFeatures():
         cc_im = 0
         wc_im = 0
         if data_dict['postMedia']:
-            s = pytesseract.image_to_string(Image.open(data_dict['postMedia']))
+            # should be fine even with //
+            s = pytesseract.image_to_string(media_location + "/" + Image.open(data_dict['postMedia']))
 
             if s:
                 wc_im = word_count_function(s)
