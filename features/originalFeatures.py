@@ -3,6 +3,7 @@ from nltk.corpus import words
 from nltk.corpus import wordnet
 
 import glob
+from features.text_image_extract import extract_info
 
 try:
     from PIL import Image
@@ -350,23 +351,24 @@ column_names = ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPost
                 'RatioNoCharArticleParagraphArticleDescription']
 
 
-def export():
-    original_features = {'id': get_id_data(),
-                         'PostTitleWordsNumber': post_title_words(),
-                         'PostTitleCharsNumber': post_title_chars(),
-                         'DiffNoWordsPostTitleAndKeywords': diff_words_title_keywords(),
-                         'DiffNoCharsPostTitleAndKeywords': diff_chars_title_keywords(),
-                         'RatioNoWordsArticleDescriptionAndPostTitle': ratio_words_descr_title(),
-                         'QuestionMarksNoPostTitle': question_marks_title(),
-                         'RatioNoCharArticleParagraphPostTitle': ratio_paragraphs_title(),
-                         'RatioNoCharArticleDescriptionPostTitle': ratio_description_title(),
-                         'RatioNoCharArticleTitlePostTitle': ratio_article_title_post_title(),
-                         'RatioNoWordsArticleTitlePostTitle': ratio_words_article_title_post_title(),
-                         'RatioNoWordsPostImagePostTitle': ratio_words_image_title(),
-                         'DiffCharsPostTitlePostImage': diff_chars_title_image(),
-                         'RatioCharPostImagePostTitle': ratio_chars_image_title(),
-                         'FormalWordsPostTitle': check_formal_words_no(),
-                         'RatioNoCharArticleParagraphArticleDescription': ratio_paragraphs_description()
+def export(data, media_file):
+    image_meta = extract_info(media_file)
+    original_features = {'id': get_id_data(data),
+                         'PostTitleWordsNumber': post_title_words(data),
+                         'PostTitleCharsNumber': post_title_chars(data),
+                         'DiffNoWordsPostTitleAndKeywords': diff_words_title_keywords(data),
+                         'DiffNoCharsPostTitleAndKeywords': diff_chars_title_keywords(data),
+                         'RatioNoWordsArticleDescriptionAndPostTitle': ratio_words_descr_title(data),
+                         'QuestionMarksNoPostTitle': question_marks_title(data),
+                         'RatioNoCharArticleParagraphPostTitle': ratio_paragraphs_title(data),
+                         'RatioNoCharArticleDescriptionPostTitle': ratio_description_title(data),
+                         'RatioNoCharArticleTitlePostTitle': ratio_article_title_post_title(data),
+                         'RatioNoWordsArticleTitlePostTitle': ratio_words_article_title_post_title(data),
+                         'RatioNoWordsPostImagePostTitle': ratio_words_image_title(data, image_meta),
+                         'DiffCharsPostTitlePostImage': diff_chars_title_image(data, image_meta),
+                         'RatioCharPostImagePostTitle': ratio_chars_image_title(data, image_meta),
+                         'FormalWordsPostTitle': check_formal_words_no(data),
+                         'RatioNoCharArticleParagraphArticleDescription': ratio_paragraphs_description(data)
                          }
 
     df = DataFrame(original_features,
