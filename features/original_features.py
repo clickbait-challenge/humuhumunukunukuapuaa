@@ -139,7 +139,7 @@ class OriginalFeatures():
 
             # # Ratio words in post image and post title
             # def ratio_words_image_title(data, image_meta):
-            wc_im / wc_postText if wc_im != 0 else -1,
+            wc_im / wc_postText if wc_im != 0 else 0,
 
             # # Difference characters post title and image text
             # def diff_chars_title_image(data, image_meta):
@@ -147,7 +147,7 @@ class OriginalFeatures():
 
             # # ratio characters post image text and post title
             # def ratio_chars_image_title(data, image_meta):
-            cc_im / cc_postText if cc_im != 0 else -1,
+            cc_im / cc_postText if cc_im != 0 else 0,
 
             # # check if formal word
             # def check_formal_words_no(data):
@@ -200,7 +200,7 @@ class OriginalFeatures():
 
             # # Ratio words in post image and post title
             # def ratio_words_image_title(data, image_meta):
-            -1,
+            0,
 
             # # Difference characters post title and image text
             # def diff_chars_title_image(data, image_meta):
@@ -208,7 +208,7 @@ class OriginalFeatures():
 
             # # ratio characters post image text and post title
             # def ratio_chars_image_title(data, image_meta):
-            -1,
+            0,
 
             # # check if formal word
             # def check_formal_words_no(data):
