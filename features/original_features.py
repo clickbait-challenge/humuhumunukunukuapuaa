@@ -97,6 +97,10 @@ class OriginalFeatures():
             # def post_title_words(data):
             wc_postText,
 
+            # # Number of characters in post title
+            # def post_title_chars(data):
+            cc_postText,
+
             # # Difference number of words post title and article keywords.
             # def diff_words_title_keywords(data):
             abs(wc_postText - kc_targetKeywords),
@@ -113,10 +117,6 @@ class OriginalFeatures():
             # def question_marks_title(data):
             postText.count('?'),
 
-            # # Number of characters in post title
-            # def post_title_chars(data):
-            cc_postText,
-
             # # Number of characters ratio article paragraphs and post title
             # def ratio_paragraphs_title(data):
             cc_targetParagraphs / cc_postText if cc_targetParagraphs != 0 else -1,
@@ -124,10 +124,6 @@ class OriginalFeatures():
             # # Number of characters ratio article description and post title
             # def ratio_description_title(data):
             cc_targetDescription / cc_postText if cc_targetDescription != 0 else -1,
-
-            # # Number of characters ratio article paragraphs and article description
-            # def ratio_paragraphs_description(data):
-            cc_targetParagraphs / cc_targetDescription if cc_targetParagraphs * cc_targetDescription != 0 else -1,
 
             # # Number of characters ratio article title and post title
             # def ratio_article_title_post_title(data):
@@ -151,11 +147,20 @@ class OriginalFeatures():
 
             # # check if formal word
             # def check_formal_words_no(data):
-            formal_words
+            formal_words,
+
+            # # Number of characters ratio article paragraphs and article description
+            # def ratio_paragraphs_description(data):
+            cc_targetParagraphs / cc_targetDescription if cc_targetParagraphs * cc_targetDescription != 0 else -1
+
         ] if postText else [
             # # Number of words in post title
             # def post_title_words(data):
             wc_postText,
+
+            # # Number of characters in post title
+            # def post_title_chars(data):
+            cc_postText,
 
             # # Difference number of words post title and article keywords.
             # def diff_words_title_keywords(data):
@@ -173,10 +178,6 @@ class OriginalFeatures():
             # def question_marks_title(data):
             postText.count('?'),
 
-            # # Number of characters in post title
-            # def post_title_chars(data):
-            cc_postText,
-
             # # Number of characters ratio article paragraphs and post title
             # def ratio_paragraphs_title(data):
             -1,
@@ -184,10 +185,6 @@ class OriginalFeatures():
             # # Number of characters ratio article description and post title
             # def ratio_description_title(data):
             -1,
-
-            # # Number of characters ratio article paragraphs and article description
-            # def ratio_paragraphs_description(data):
-            cc_targetParagraphs / cc_targetDescription if cc_targetParagraphs * cc_targetDescription != 0 else -1,
 
             # # Number of characters ratio article title and post title
             # def ratio_article_title_post_title(data):
@@ -211,7 +208,11 @@ class OriginalFeatures():
 
             # # check if formal word
             # def check_formal_words_no(data):
-            formal_words
+            formal_words,
+
+            # # Number of characters ratio article paragraphs and article description
+            # def ratio_paragraphs_description(data):
+            cc_targetParagraphs / cc_targetDescription if cc_targetParagraphs * cc_targetDescription != 0 else -1
         ]
 
         return results
