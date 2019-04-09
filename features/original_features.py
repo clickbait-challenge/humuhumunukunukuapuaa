@@ -22,7 +22,7 @@ def word_count_function(string):
 
 def char_count_function(string):
     if string:
-        number_of_words = len(string.split())
+        number_of_words = len(string)
     else:
         number_of_words = -1
 
@@ -56,7 +56,7 @@ class OriginalFeatures():
     @return list of features
     '''
 
-    def compute_features_per_entry(self, data_dict, media_location):
+    def compute_features_per_entry(self, data_dict):
         # cached fields
         postText = data_dict['postText'][0]
 
@@ -77,7 +77,7 @@ class OriginalFeatures():
         wc_im = 0
         if data_dict['postMedia']:
             # should be fine even with //
-            s = pytesseract.image_to_string(Image.open(media_location + "/" + data_dict['postMedia']))
+            s = pytesseract.image_to_string(Image.open(data_dict['postMedia'][0]))
 
             if s:
                 wc_im = word_count_function(s)
