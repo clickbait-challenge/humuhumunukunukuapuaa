@@ -1,0 +1,296 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.09-10:33:51] Init POS feats extractor with feats list: ['Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs']
+[2019.04.09-10:33:51] Init sentence sentiment feats extractor with feats list: ['VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg']
+[2019.04.09-10:33:51] Init sentence structure feats extractor with feats list: ['WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg']
+[2019.04.09-10:33:51] Start loading GloVe Twitter pretrained word embeddings ...
+[2019.04.09-10:33:51] Finished loading GloVe [0.01s]
+[2019.04.09-10:33:51] Init sentence emb average extractor with 100 dims
+[2019.04.09-10:33:51] Init sentence structure feats extractor with feats list: ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription']
+[2019.04.09-10:33:51] Start reading data file from data\large\instances.jsonl ...
+[2019.04.09-10:33:52] Finish reading [0.82s]
+[2019.04.09-10:33:52] Start reading targets file from data\large\truth.jsonl ...
+[2019.04.09-10:33:52] Finish reading [0.23s]
+[2019.04.09-10:33:53] Dropping ID column from one dataframe
+[2019.04.09-10:33:53] Concatenate dataframes
+[2019.04.09-10:33:53] Add target column
+[2019.04.09-10:33:53] Feature cols ['PostTitleW..', 'PostTitleC..', 'DiffNoWord..', 'DiffNoChar..', 'RatioNoWor..', 'QuestionMa..', 'RatioNoCha..', 'RatioNoCha..', 'RatioNoCha..', 'RatioNoWor..', 'RatioNoWor..', 'DiffCharsP..', 'RatioCharP..', 'FormalWord..', 'RatioNoCha..', 'Prop_Nouns..', 'Advb_Deter..', 'PerPos_Pro..', 'Past3rdSin..', 'VaderS_Neg..', 'VaderS_Neu..', 'VaderS_Pos..', 'Opinion_Po..', 'Opinion_Ne..', 'WordLen_Av..', 'Start_Digi..', 'Num_StopW..', 'CBait_Phra..', 'Synt_DepMa..', 'Synt_DepAv..', 'EMB_1..', 'EMB_2..', 'EMB_3..', 'EMB_4..', 'EMB_5..', 'EMB_6..', 'EMB_7..', 'EMB_8..', 'EMB_9..', 'EMB_10..', 'EMB_11..', 'EMB_12..', 'EMB_13..', 'EMB_14..', 'EMB_15..', 'EMB_16..', 'EMB_17..', 'EMB_18..', 'EMB_19..', 'EMB_20..', 'EMB_21..', 'EMB_22..', 'EMB_23..', 'EMB_24..', 'EMB_25..', 'EMB_26..', 'EMB_27..', 'EMB_28..', 'EMB_29..', 'EMB_30..', 'EMB_31..', 'EMB_32..', 'EMB_33..', 'EMB_34..', 'EMB_35..', 'EMB_36..', 'EMB_37..', 'EMB_38..', 'EMB_39..', 'EMB_40..', 'EMB_41..', 'EMB_42..', 'EMB_43..', 'EMB_44..', 'EMB_45..', 'EMB_46..', 'EMB_47..', 'EMB_48..', 'EMB_49..', 'EMB_50..', 'EMB_51..', 'EMB_52..', 'EMB_53..', 'EMB_54..', 'EMB_55..', 'EMB_56..', 'EMB_57..', 'EMB_58..', 'EMB_59..', 'EMB_60..', 'EMB_61..', 'EMB_62..', 'EMB_63..', 'EMB_64..', 'EMB_65..', 'EMB_66..', 'EMB_67..', 'EMB_68..', 'EMB_69..', 'EMB_70..', 'EMB_71..', 'EMB_72..', 'EMB_73..', 'EMB_74..', 'EMB_75..', 'EMB_76..', 'EMB_77..', 'EMB_78..', 'EMB_79..', 'EMB_80..', 'EMB_81..', 'EMB_82..', 'EMB_83..', 'EMB_84..', 'EMB_85..', 'EMB_86..', 'EMB_87..', 'EMB_88..', 'EMB_89..', 'EMB_90..', 'EMB_91..', 'EMB_92..', 'EMB_93..', 'EMB_94..', 'EMB_95..', 'EMB_96..', 'EMB_97..', 'EMB_98..', 'EMB_99..', 'EMB_100..']
+[2019.04.09-10:33:53] Final dataframe snippet 
+    PostTitleWordsNumber  PostTitleCharsNumber         ...          Click_Bait                  ID
+0                    12                    79         ...            1.000000  858462320779026433
+1                     3                    12         ...            0.133333  858421020331560960
+2                    15                    89         ...            0.400000  858368123753435136
+3                     7                    36         ...            0.266667  858323428260139008
+4                    16                    92         ...            0.000000  858283602626347008
+
+[5 rows x 132 columns]
+[2019.04.09-10:33:53] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:33:53] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:33:53] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:33:53] Training on all features ... ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription', 'Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs', 'VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg', 'WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg', 'EMB_1', 'EMB_2', 'EMB_3', 'EMB_4', 'EMB_5', 'EMB_6', 'EMB_7', 'EMB_8', 'EMB_9', 'EMB_10', 'EMB_11', 'EMB_12', 'EMB_13', 'EMB_14', 'EMB_15', 'EMB_16', 'EMB_17', 'EMB_18', 'EMB_19', 'EMB_20', 'EMB_21', 'EMB_22', 'EMB_23', 'EMB_24', 'EMB_25', 'EMB_26', 'EMB_27', 'EMB_28', 'EMB_29', 'EMB_30', 'EMB_31', 'EMB_32', 'EMB_33', 'EMB_34', 'EMB_35', 'EMB_36', 'EMB_37', 'EMB_38', 'EMB_39', 'EMB_40', 'EMB_41', 'EMB_42', 'EMB_43', 'EMB_44', 'EMB_45', 'EMB_46', 'EMB_47', 'EMB_48', 'EMB_49', 'EMB_50', 'EMB_51', 'EMB_52', 'EMB_53', 'EMB_54', 'EMB_55', 'EMB_56', 'EMB_57', 'EMB_58', 'EMB_59', 'EMB_60', 'EMB_61', 'EMB_62', 'EMB_63', 'EMB_64', 'EMB_65', 'EMB_66', 'EMB_67', 'EMB_68', 'EMB_69', 'EMB_70', 'EMB_71', 'EMB_72', 'EMB_73', 'EMB_74', 'EMB_75', 'EMB_76', 'EMB_77', 'EMB_78', 'EMB_79', 'EMB_80', 'EMB_81', 'EMB_82', 'EMB_83', 'EMB_84', 'EMB_85', 'EMB_86', 'EMB_87', 'EMB_88', 'EMB_89', 'EMB_90', 'EMB_91', 'EMB_92', 'EMB_93', 'EMB_94', 'EMB_95', 'EMB_96', 'EMB_97', 'EMB_98', 'EMB_99', 'EMB_100', 'Click_Bait', 'ID']
+[2019.04.09-10:34:43] Scores snippet [0.50294636 0.49867796 0.50315973 0.50064701 0.50477527 0.50343559
+ 0.50136914 0.41840919 0.46097732 0.50232089]
+[2019.04.09-10:34:43] Accuracy 0.5335209825997953
+[2019.04.09-10:34:43] Precision 0.23236009732360097
+[2019.04.09-10:34:43] Recall 0.4050901378579003
+[2019.04.09-10:34:43] F1 0.29532276768457677
+[2019.04.09-10:34:43] MSE 0.09296017610834158
+[2019.04.09-10:34:43] AUC 0.49400208260071155
+[2019.04.09-10:34:43] 
+[2019.04.09-10:34:43] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:34:43] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:34:43] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:34:43] Training on only original features ... ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription', 'Click_Bait', 'ID']
+[2019.04.09-10:34:48] Scores snippet [0.49939856 0.49759927 0.49932659 0.50159257 0.49913528 0.50058051
+ 0.49948891 0.49926516 0.50032679 0.50150059]
+[2019.04.09-10:34:48] Accuracy 0.6289662231320369
+[2019.04.09-10:34:48] Precision 0.2410623084780388
+[2019.04.09-10:34:48] Recall 0.25026511134676566
+[2019.04.09-10:34:48] F1 0.24557752341311137
+[2019.04.09-10:34:48] MSE 0.09377480880728264
+[2019.04.09-10:34:48] AUC 0.4977017021089935
+[2019.04.09-10:34:48] 
+[2019.04.09-10:34:48] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:34:48] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:34:48] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:34:48] Training on only sentiment features ... ['VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg', 'Click_Bait', 'ID']
+[2019.04.09-10:34:51] Scores snippet [0.49891547 0.49655983 0.49873932 0.51517846 0.49934571 0.50007873
+ 0.49973164 0.49873932 0.49873932 0.49873932]
+[2019.04.09-10:34:51] Accuracy 0.6604401228249744
+[2019.04.09-10:34:51] Precision 0.23626373626373626
+[2019.04.09-10:34:51] Recall 0.1823966065747614
+[2019.04.09-10:34:51] F1 0.20586475164572113
+[2019.04.09-10:34:51] MSE 0.09383195911670539
+[2019.04.09-10:34:51] AUC 0.4979381611671201
+[2019.04.09-10:34:51] 
+[2019.04.09-10:34:51] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:34:51] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:34:51] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:34:51] Training on only structure features ... ['WordLen_Avg', 'Start_Digit', 'Synt_DepMax', 'Synt_DepAvg', 'Click_Bait', 'ID']
+[2019.04.09-10:34:54] Scores snippet [0.49972543 0.49961802 0.49875656 0.49989712 0.50014985 0.49810236
+ 0.49787732 0.49497226 0.50021513 0.50188394]
+[2019.04.09-10:34:54] Accuracy 0.6340839303991812
+[2019.04.09-10:34:54] Precision 0.2542885973763875
+[2019.04.09-10:34:54] Recall 0.2672322375397667
+[2019.04.09-10:34:54] F1 0.26059979317476734
+[2019.04.09-10:34:54] MSE 0.0938366992286917
+[2019.04.09-10:34:54] AUC 0.5057920557166695
+[2019.04.09-10:34:54] 
+[2019.04.09-10:34:54] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:34:54] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:34:54] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:34:54] Training on only embedding features ... ['EMB_1', 'EMB_2', 'EMB_3', 'EMB_4', 'EMB_5', 'EMB_6', 'EMB_7', 'EMB_8', 'EMB_9', 'EMB_10', 'EMB_11', 'EMB_12', 'EMB_13', 'EMB_14', 'EMB_15', 'EMB_16', 'EMB_17', 'EMB_18', 'EMB_19', 'EMB_20', 'EMB_21', 'EMB_22', 'EMB_23', 'EMB_24', 'EMB_25', 'EMB_26', 'EMB_27', 'EMB_28', 'EMB_29', 'EMB_30', 'EMB_31', 'EMB_32', 'EMB_33', 'EMB_34', 'EMB_35', 'EMB_36', 'EMB_37', 'EMB_38', 'EMB_39', 'EMB_40', 'EMB_41', 'EMB_42', 'EMB_43', 'EMB_44', 'EMB_45', 'EMB_46', 'EMB_47', 'EMB_48', 'EMB_49', 'EMB_50', 'EMB_51', 'EMB_52', 'EMB_53', 'EMB_54', 'EMB_55', 'EMB_56', 'EMB_57', 'EMB_58', 'EMB_59', 'EMB_60', 'EMB_61', 'EMB_62', 'EMB_63', 'EMB_64', 'EMB_65', 'EMB_66', 'EMB_67', 'EMB_68', 'EMB_69', 'EMB_70', 'EMB_71', 'EMB_72', 'EMB_73', 'EMB_74', 'EMB_75', 'EMB_76', 'EMB_77', 'EMB_78', 'EMB_79', 'EMB_80', 'EMB_81', 'EMB_82', 'EMB_83', 'EMB_84', 'EMB_85', 'EMB_86', 'EMB_87', 'EMB_88', 'EMB_89', 'EMB_90', 'EMB_91', 'EMB_92', 'EMB_93', 'EMB_94', 'EMB_95', 'EMB_96', 'EMB_97', 'EMB_98', 'EMB_99', 'EMB_100', 'Click_Bait', 'ID']
+[2019.04.09-10:35:36] Scores snippet [0.50090338 0.50059879 0.50077727 0.49939697 0.50183747 0.49997182
+ 0.50651255 0.38636014 0.5028579  0.49536671]
+[2019.04.09-10:35:36] Accuracy 0.5542476970317298
+[2019.04.09-10:35:36] Precision 0.23024983119513842
+[2019.04.09-10:35:36] Recall 0.3616118769883351
+[2019.04.09-10:35:36] F1 0.28135313531353134
+[2019.04.09-10:35:36] MSE 0.09337968614666578
+[2019.04.09-10:35:36] AUC 0.4886505905207761
+[2019.04.09-10:35:36] 
+[2019.04.09-10:35:36] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:35:36] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:35:36] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:35:36] Training on only stopW + cBaitPhr features ... ['Num_StopW', 'CBait_Phrase', 'Click_Bait', 'ID']
+[2019.04.09-10:35:37] Scores snippet [0.49627144 0.49861282 0.49608675 0.49905762 0.50059462 0.4967543
+ 0.50022603 0.49753568 0.4967543  0.49905762]
+[2019.04.09-10:35:37] Accuracy 0.5757420675537359
+[2019.04.09-10:35:37] Precision 0.24187725631768953
+[2019.04.09-10:35:37] Recall 0.3552492046659597
+[2019.04.09-10:35:37] F1 0.28780068728522334
+[2019.04.09-10:35:37] MSE 0.09398609096504563
+[2019.04.09-10:35:37] AUC 0.5032195466834914
+[2019.04.09-10:35:37] 
+[2019.04.09-10:35:37] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:35:37] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:35:37] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:35:37] Training on only pos features ... ['Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs', 'Click_Bait', 'ID']
+[2019.04.09-10:35:38] Scores snippet [0.50041468 0.50474133 0.49788892 0.49899929 0.49795207 0.49755859
+ 0.50072998 0.49757616 0.49863371 0.50186556]
+[2019.04.09-10:35:38] Accuracy 0.6379222108495394
+[2019.04.09-10:35:38] Precision 0.2299771167048055
+[2019.04.09-10:35:38] Recall 0.21314952279957583
+[2019.04.09-10:35:38] F1 0.2212438084755091
+[2019.04.09-10:35:38] MSE 0.0938702556822236
+[2019.04.09-10:35:38] AUC 0.49045604411267674
+[2019.04.09-10:35:38] 
+[2019.04.09-10:35:38] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:35:38] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:35:38] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:35:39] Training without original features ... ['Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs', 'VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg', 'WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg', 'EMB_1', 'EMB_2', 'EMB_3', 'EMB_4', 'EMB_5', 'EMB_6', 'EMB_7', 'EMB_8', 'EMB_9', 'EMB_10', 'EMB_11', 'EMB_12', 'EMB_13', 'EMB_14', 'EMB_15', 'EMB_16', 'EMB_17', 'EMB_18', 'EMB_19', 'EMB_20', 'EMB_21', 'EMB_22', 'EMB_23', 'EMB_24', 'EMB_25', 'EMB_26', 'EMB_27', 'EMB_28', 'EMB_29', 'EMB_30', 'EMB_31', 'EMB_32', 'EMB_33', 'EMB_34', 'EMB_35', 'EMB_36', 'EMB_37', 'EMB_38', 'EMB_39', 'EMB_40', 'EMB_41', 'EMB_42', 'EMB_43', 'EMB_44', 'EMB_45', 'EMB_46', 'EMB_47', 'EMB_48', 'EMB_49', 'EMB_50', 'EMB_51', 'EMB_52', 'EMB_53', 'EMB_54', 'EMB_55', 'EMB_56', 'EMB_57', 'EMB_58', 'EMB_59', 'EMB_60', 'EMB_61', 'EMB_62', 'EMB_63', 'EMB_64', 'EMB_65', 'EMB_66', 'EMB_67', 'EMB_68', 'EMB_69', 'EMB_70', 'EMB_71', 'EMB_72', 'EMB_73', 'EMB_74', 'EMB_75', 'EMB_76', 'EMB_77', 'EMB_78', 'EMB_79', 'EMB_80', 'EMB_81', 'EMB_82', 'EMB_83', 'EMB_84', 'EMB_85', 'EMB_86', 'EMB_87', 'EMB_88', 'EMB_89', 'EMB_90', 'EMB_91', 'EMB_92', 'EMB_93', 'EMB_94', 'EMB_95', 'EMB_96', 'EMB_97', 'EMB_98', 'EMB_99', 'EMB_100', 'Click_Bait', 'ID']
+[2019.04.09-10:36:20] Scores snippet [0.50013322 0.50062205 0.50188444 0.50271737 0.50052744 0.49926319
+ 0.50499806 0.45989293 0.50093641 0.5043402 ]
+[2019.04.09-10:36:20] Accuracy 0.5506653019447287
+[2019.04.09-10:36:20] Precision 0.23274161735700197
+[2019.04.09-10:36:20] Recall 0.3753976670201485
+[2019.04.09-10:36:20] F1 0.28733766233766234
+[2019.04.09-10:36:20] MSE 0.09309828768786044
+[2019.04.09-10:36:20] AUC 0.4887754189299267
+[2019.04.09-10:36:20] 
+[2019.04.09-10:36:20] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:36:20] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:36:20] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:36:20] Training without structure features ... ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription', 'Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs', 'VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg', 'Num_StopW', 'CBait_Phrase', 'EMB_1', 'EMB_2', 'EMB_3', 'EMB_4', 'EMB_5', 'EMB_6', 'EMB_7', 'EMB_8', 'EMB_9', 'EMB_10', 'EMB_11', 'EMB_12', 'EMB_13', 'EMB_14', 'EMB_15', 'EMB_16', 'EMB_17', 'EMB_18', 'EMB_19', 'EMB_20', 'EMB_21', 'EMB_22', 'EMB_23', 'EMB_24', 'EMB_25', 'EMB_26', 'EMB_27', 'EMB_28', 'EMB_29', 'EMB_30', 'EMB_31', 'EMB_32', 'EMB_33', 'EMB_34', 'EMB_35', 'EMB_36', 'EMB_37', 'EMB_38', 'EMB_39', 'EMB_40', 'EMB_41', 'EMB_42', 'EMB_43', 'EMB_44', 'EMB_45', 'EMB_46', 'EMB_47', 'EMB_48', 'EMB_49', 'EMB_50', 'EMB_51', 'EMB_52', 'EMB_53', 'EMB_54', 'EMB_55', 'EMB_56', 'EMB_57', 'EMB_58', 'EMB_59', 'EMB_60', 'EMB_61', 'EMB_62', 'EMB_63', 'EMB_64', 'EMB_65', 'EMB_66', 'EMB_67', 'EMB_68', 'EMB_69', 'EMB_70', 'EMB_71', 'EMB_72', 'EMB_73', 'EMB_74', 'EMB_75', 'EMB_76', 'EMB_77', 'EMB_78', 'EMB_79', 'EMB_80', 'EMB_81', 'EMB_82', 'EMB_83', 'EMB_84', 'EMB_85', 'EMB_86', 'EMB_87', 'EMB_88', 'EMB_89', 'EMB_90', 'EMB_91', 'EMB_92', 'EMB_93', 'EMB_94', 'EMB_95', 'EMB_96', 'EMB_97', 'EMB_98', 'EMB_99', 'EMB_100', 'Click_Bait', 'ID']
+[2019.04.09-10:37:06] Scores snippet [0.50152693 0.50135073 0.49899589 0.50389049 0.50196409 0.46001783
+ 0.50307814 0.45938084 0.50133821 0.46507925]
+[2019.04.09-10:37:06] Accuracy 0.5657625383828045
+[2019.04.09-10:37:06] Precision 0.24833110814419226
+[2019.04.09-10:37:06] Recall 0.3944856839872747
+[2019.04.09-10:37:06] F1 0.30479311757476446
+[2019.04.09-10:37:06] MSE 0.09330970569668633
+[2019.04.09-10:37:06] AUC 0.49657158423626174
+[2019.04.09-10:37:06] 
+[2019.04.09-10:37:06] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:37:06] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:37:06] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:37:06] Training without sentiment features ... ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription', 'Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs', 'WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg', 'EMB_1', 'EMB_2', 'EMB_3', 'EMB_4', 'EMB_5', 'EMB_6', 'EMB_7', 'EMB_8', 'EMB_9', 'EMB_10', 'EMB_11', 'EMB_12', 'EMB_13', 'EMB_14', 'EMB_15', 'EMB_16', 'EMB_17', 'EMB_18', 'EMB_19', 'EMB_20', 'EMB_21', 'EMB_22', 'EMB_23', 'EMB_24', 'EMB_25', 'EMB_26', 'EMB_27', 'EMB_28', 'EMB_29', 'EMB_30', 'EMB_31', 'EMB_32', 'EMB_33', 'EMB_34', 'EMB_35', 'EMB_36', 'EMB_37', 'EMB_38', 'EMB_39', 'EMB_40', 'EMB_41', 'EMB_42', 'EMB_43', 'EMB_44', 'EMB_45', 'EMB_46', 'EMB_47', 'EMB_48', 'EMB_49', 'EMB_50', 'EMB_51', 'EMB_52', 'EMB_53', 'EMB_54', 'EMB_55', 'EMB_56', 'EMB_57', 'EMB_58', 'EMB_59', 'EMB_60', 'EMB_61', 'EMB_62', 'EMB_63', 'EMB_64', 'EMB_65', 'EMB_66', 'EMB_67', 'EMB_68', 'EMB_69', 'EMB_70', 'EMB_71', 'EMB_72', 'EMB_73', 'EMB_74', 'EMB_75', 'EMB_76', 'EMB_77', 'EMB_78', 'EMB_79', 'EMB_80', 'EMB_81', 'EMB_82', 'EMB_83', 'EMB_84', 'EMB_85', 'EMB_86', 'EMB_87', 'EMB_88', 'EMB_89', 'EMB_90', 'EMB_91', 'EMB_92', 'EMB_93', 'EMB_94', 'EMB_95', 'EMB_96', 'EMB_97', 'EMB_98', 'EMB_99', 'EMB_100', 'Click_Bait', 'ID']
+[2019.04.09-10:37:51] Scores snippet [0.49971078 0.5001407  0.50033019 0.50290286 0.46010735 0.5002196
+ 0.50525287 0.41936399 0.50315773 0.50165802]
+[2019.04.09-10:37:51] Accuracy 0.554503582395087
+[2019.04.09-10:37:51] Precision 0.23221476510067113
+[2019.04.09-10:37:51] Recall 0.3669141039236479
+[2019.04.09-10:37:51] F1 0.28442252363337445
+[2019.04.09-10:37:51] MSE 0.09339004372139405
+[2019.04.09-10:37:51] AUC 0.49591833893781334
+[2019.04.09-10:37:51] 
+[2019.04.09-10:37:51] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:37:51] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:37:51] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:37:51] Training without embedding features ... ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription', 'Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs', 'VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg', 'WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg', 'Click_Bait', 'ID']
+[2019.04.09-10:37:57] Scores snippet [0.50074361 0.50041814 0.49641973 0.50324057 0.49956864 0.49964148
+ 0.49818598 0.49565129 0.50108284 0.50068953]
+[2019.04.09-10:37:57] Accuracy 0.6082395087001023
+[2019.04.09-10:37:57] Precision 0.23027522935779818
+[2019.04.09-10:37:57] Recall 0.26617179215270415
+[2019.04.09-10:37:57] F1 0.2469257255287752
+[2019.04.09-10:37:57] MSE 0.09366697469282742
+[2019.04.09-10:37:57] AUC 0.49103320018419905
+[2019.04.09-10:37:57] 
+[2019.04.09-10:37:57] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:37:57] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:37:57] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:37:57] Training without pos features ... ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription', 'VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg', 'WordLen_Avg', 'Start_Digit', 'Num_StopW', 'CBait_Phrase', 'Synt_DepMax', 'Synt_DepAvg', 'EMB_1', 'EMB_2', 'EMB_3', 'EMB_4', 'EMB_5', 'EMB_6', 'EMB_7', 'EMB_8', 'EMB_9', 'EMB_10', 'EMB_11', 'EMB_12', 'EMB_13', 'EMB_14', 'EMB_15', 'EMB_16', 'EMB_17', 'EMB_18', 'EMB_19', 'EMB_20', 'EMB_21', 'EMB_22', 'EMB_23', 'EMB_24', 'EMB_25', 'EMB_26', 'EMB_27', 'EMB_28', 'EMB_29', 'EMB_30', 'EMB_31', 'EMB_32', 'EMB_33', 'EMB_34', 'EMB_35', 'EMB_36', 'EMB_37', 'EMB_38', 'EMB_39', 'EMB_40', 'EMB_41', 'EMB_42', 'EMB_43', 'EMB_44', 'EMB_45', 'EMB_46', 'EMB_47', 'EMB_48', 'EMB_49', 'EMB_50', 'EMB_51', 'EMB_52', 'EMB_53', 'EMB_54', 'EMB_55', 'EMB_56', 'EMB_57', 'EMB_58', 'EMB_59', 'EMB_60', 'EMB_61', 'EMB_62', 'EMB_63', 'EMB_64', 'EMB_65', 'EMB_66', 'EMB_67', 'EMB_68', 'EMB_69', 'EMB_70', 'EMB_71', 'EMB_72', 'EMB_73', 'EMB_74', 'EMB_75', 'EMB_76', 'EMB_77', 'EMB_78', 'EMB_79', 'EMB_80', 'EMB_81', 'EMB_82', 'EMB_83', 'EMB_84', 'EMB_85', 'EMB_86', 'EMB_87', 'EMB_88', 'EMB_89', 'EMB_90', 'EMB_91', 'EMB_92', 'EMB_93', 'EMB_94', 'EMB_95', 'EMB_96', 'EMB_97', 'EMB_98', 'EMB_99', 'EMB_100', 'Click_Bait', 'ID']
+[2019.04.09-10:38:41] Scores snippet [0.50090387 0.49966653 0.50132881 0.5007249  0.50215513 0.50131601
+ 0.50515482 0.42161466 0.50270908 0.50181804]
+[2019.04.09-10:38:41] Accuracy 0.5429887410440123
+[2019.04.09-10:38:41] Precision 0.23738317757009345
+[2019.04.09-10:38:41] Recall 0.40402969247083775
+[2019.04.09-10:38:41] F1 0.2990580847723705
+[2019.04.09-10:38:41] MSE 0.09336729575352022
+[2019.04.09-10:38:41] AUC 0.4981421079570081
+[2019.04.09-10:38:41] 
+[2019.04.09-10:38:41] Loading params for ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.09-10:38:41] Loading params for XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.09-10:38:41] Finish loading best architecture VotingClassifier(estimators=[('ADA', AdaBoostClassifier(algorithm='SAMME.R',
+          base_estimator=DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=5,
+            max_features='sqrt', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_...alpha=0.01,
+       reg_lambda=1, scale_pos_weight=1, seed=None, silent=True,
+       subsample=1.0))],
+         flatten_transform=None, n_jobs=-1, voting='soft',
+         weights=[0.5, 0.5])
+[2019.04.09-10:38:41] Training without stopW + cBaitPhr features ... ['PostTitleWordsNumber', 'PostTitleCharsNumber', 'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords', 'RatioNoWordsArticleDescriptionAndPostTitle', 'QuestionMarksNoPostTitle', 'RatioNoCharArticleParagraphPostTitle', 'RatioNoCharArticleDescriptionPostTitle', 'RatioNoCharArticleTitlePostTitle', 'RatioNoWordsArticleTitlePostTitle', 'RatioNoWordsPostImagePostTitle', 'DiffCharsPostTitlePostImage', 'RatioCharPostImagePostTitle', 'FormalWordsPostTitle', 'RatioNoCharArticleParagraphArticleDescription', 'Prop_Nouns', 'Advb_Determ', 'PerPos_Pronouns', 'Past3rdSing_Verbs', 'VaderS_Neg', 'VaderS_Neu', 'VaderS_Pos', 'Opinion_Pos', 'Opinion_Neg', 'WordLen_Avg', 'Start_Digit', 'Synt_DepMax', 'Synt_DepAvg', 'EMB_1', 'EMB_2', 'EMB_3', 'EMB_4', 'EMB_5', 'EMB_6', 'EMB_7', 'EMB_8', 'EMB_9', 'EMB_10', 'EMB_11', 'EMB_12', 'EMB_13', 'EMB_14', 'EMB_15', 'EMB_16', 'EMB_17', 'EMB_18', 'EMB_19', 'EMB_20', 'EMB_21', 'EMB_22', 'EMB_23', 'EMB_24', 'EMB_25', 'EMB_26', 'EMB_27', 'EMB_28', 'EMB_29', 'EMB_30', 'EMB_31', 'EMB_32', 'EMB_33', 'EMB_34', 'EMB_35', 'EMB_36', 'EMB_37', 'EMB_38', 'EMB_39', 'EMB_40', 'EMB_41', 'EMB_42', 'EMB_43', 'EMB_44', 'EMB_45', 'EMB_46', 'EMB_47', 'EMB_48', 'EMB_49', 'EMB_50', 'EMB_51', 'EMB_52', 'EMB_53', 'EMB_54', 'EMB_55', 'EMB_56', 'EMB_57', 'EMB_58', 'EMB_59', 'EMB_60', 'EMB_61', 'EMB_62', 'EMB_63', 'EMB_64', 'EMB_65', 'EMB_66', 'EMB_67', 'EMB_68', 'EMB_69', 'EMB_70', 'EMB_71', 'EMB_72', 'EMB_73', 'EMB_74', 'EMB_75', 'EMB_76', 'EMB_77', 'EMB_78', 'EMB_79', 'EMB_80', 'EMB_81', 'EMB_82', 'EMB_83', 'EMB_84', 'EMB_85', 'EMB_86', 'EMB_87', 'EMB_88', 'EMB_89', 'EMB_90', 'EMB_91', 'EMB_92', 'EMB_93', 'EMB_94', 'EMB_95', 'EMB_96', 'EMB_97', 'EMB_98', 'EMB_99', 'EMB_100', 'Click_Bait', 'ID']
+[2019.04.09-10:39:24] Scores snippet [0.50209294 0.50013292 0.49995232 0.50581563 0.50130667 0.50147301
+ 0.50344082 0.42110134 0.5010476  0.5010277 ]
+[2019.04.09-10:39:24] Accuracy 0.5506653019447287
+[2019.04.09-10:39:24] Precision 0.23483365949119372
+[2019.04.09-10:39:24] Recall 0.38176033934252385
+[2019.04.09-10:39:24] F1 0.2907915993537964
+[2019.04.09-10:39:24] MSE 0.093168437255153
+[2019.04.09-10:39:24] AUC 0.493895838196294
