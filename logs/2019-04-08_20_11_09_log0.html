@@ -1,0 +1,68 @@
+<HEAD><meta http-equiv='refresh' content='100' ></HEAD><BODY><pre>[2019.04.08-20:11:09] Start reading data file from data\large\instances.jsonl ...
+[2019.04.08-20:11:10] Finish reading [0.75s]
+[2019.04.08-20:11:10] Start reading targets file from data\large\truth.jsonl ...
+[2019.04.08-20:11:10] Finish reading [0.12s]
+[2019.04.08-20:11:11] Dropping ID column from one dataframe
+[2019.04.08-20:11:11] Concatenate dataframes
+[2019.04.08-20:11:11] Add target column
+[2019.04.08-20:11:11] Feature cols ['PostTitleW..', 'PostTitleC..', 'DiffNoWord..', 'DiffNoChar..', 'RatioNoWor..', 'QuestionMa..', 'RatioNoCha..', 'RatioNoCha..', 'RatioNoCha..', 'RatioNoWor..', 'RatioNoWor..', 'DiffCharsP..', 'RatioCharP..', 'FormalWord..', 'RatioNoCha..', 'Prop_Nouns..', 'Advb_Deter..', 'PerPos_Pro..', 'Past3rdSin..', 'VaderS_Neg..', 'VaderS_Neu..', 'VaderS_Pos..', 'Opinion_Po..', 'Opinion_Ne..', 'WordLen_Av..', 'Start_Digi..', 'Num_StopW..', 'CBait_Phra..', 'Synt_DepMa..', 'Synt_DepAv..', 'EMB_1..', 'EMB_2..', 'EMB_3..', 'EMB_4..', 'EMB_5..', 'EMB_6..', 'EMB_7..', 'EMB_8..', 'EMB_9..', 'EMB_10..', 'EMB_11..', 'EMB_12..', 'EMB_13..', 'EMB_14..', 'EMB_15..', 'EMB_16..', 'EMB_17..', 'EMB_18..', 'EMB_19..', 'EMB_20..', 'EMB_21..', 'EMB_22..', 'EMB_23..', 'EMB_24..', 'EMB_25..', 'EMB_26..', 'EMB_27..', 'EMB_28..', 'EMB_29..', 'EMB_30..', 'EMB_31..', 'EMB_32..', 'EMB_33..', 'EMB_34..', 'EMB_35..', 'EMB_36..', 'EMB_37..', 'EMB_38..', 'EMB_39..', 'EMB_40..', 'EMB_41..', 'EMB_42..', 'EMB_43..', 'EMB_44..', 'EMB_45..', 'EMB_46..', 'EMB_47..', 'EMB_48..', 'EMB_49..', 'EMB_50..', 'EMB_51..', 'EMB_52..', 'EMB_53..', 'EMB_54..', 'EMB_55..', 'EMB_56..', 'EMB_57..', 'EMB_58..', 'EMB_59..', 'EMB_60..', 'EMB_61..', 'EMB_62..', 'EMB_63..', 'EMB_64..', 'EMB_65..', 'EMB_66..', 'EMB_67..', 'EMB_68..', 'EMB_69..', 'EMB_70..', 'EMB_71..', 'EMB_72..', 'EMB_73..', 'EMB_74..', 'EMB_75..', 'EMB_76..', 'EMB_77..', 'EMB_78..', 'EMB_79..', 'EMB_80..', 'EMB_81..', 'EMB_82..', 'EMB_83..', 'EMB_84..', 'EMB_85..', 'EMB_86..', 'EMB_87..', 'EMB_88..', 'EMB_89..', 'EMB_90..', 'EMB_91..', 'EMB_92..', 'EMB_93..', 'EMB_94..', 'EMB_95..', 'EMB_96..', 'EMB_97..', 'EMB_98..', 'EMB_99..', 'EMB_100..']
+[2019.04.08-20:11:11] Final dataframe snippet 
+    PostTitleWordsNumber  PostTitleCharsNumber         ...          Click_Bait                  ID
+0                    12                    79         ...            1.000000  858462320779026433
+1                     3                    12         ...            0.133333  858421020331560960
+2                    15                    89         ...            0.400000  858368123753435136
+3                     7                    36         ...            0.266667  858323428260139008
+4                    16                    92         ...            0.000000  858283602626347008
+
+[5 rows x 132 columns]
+[2019.04.08-20:11:11] Splitting data in 15630 train / 3908 test
+[2019.04.08-20:11:11] Assign 3.0 weight to clickBaits
+[2019.04.08-20:11:11] Loading params for BEST_DECT from DecisionTreeClassifier_params_2019-04-06_15_30_59.json ...
+[2019.04.08-20:11:11] Start training DecisionTreeClassifier with {'splitter': 'best', 'random_state': 13, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'log2', 'max_depth': 7, 'criterion': 'entropy'} ...
+[2019.04.08-20:11:11] Finish training [0.13s]
+[2019.04.08-20:11:11] Accuracy 0.7016376663254862
+[2019.04.08-20:11:11] Precision 0.23132530120481928
+[2019.04.08-20:11:11] Recall 0.10180275715800637
+[2019.04.08-20:11:11] F1 0.14138438880706922
+[2019.04.08-20:11:11] MSE 0.09565307324795042
+[2019.04.08-20:11:11] AUC 0.4984476653371811
+[2019.04.08-20:11:11] Saving model to DecisionTreeClassifier_0.0957.pkl ...
+[2019.04.08-20:11:11] Loading params for BEST_ADA from AdaBoostClassifier_params_2019-04-06_15_41_20.json ...
+[2019.04.08-20:11:11] Start training AdaBoostClassifier with {'random_state': 13, 'n_estimators': 110, 'learning_rate': 0.05, 'base_estimator__splitter': 'random', 'base_estimator__min_samples_split': 5, 'base_estimator__min_samples_leaf': 8, 'base_estimator__max_features': 'sqrt', 'base_estimator__max_depth': 5, 'base_estimator__criterion': 'gini'} ...
+[2019.04.08-20:11:13] Finish training [1.73s]
+[2019.04.08-20:11:13] Accuracy 0.5360798362333674
+[2019.04.08-20:11:13] Precision 0.24531615925058547
+[2019.04.08-20:11:13] Recall 0.4443266171792153
+[2019.04.08-20:11:13] F1 0.3161071293851377
+[2019.04.08-20:11:13] MSE 0.09229908077663691
+[2019.04.08-20:11:13] AUC 0.4965375720011842
+[2019.04.08-20:11:13] Saving model to AdaBoostClassifier_0.0923.pkl ...
+[2019.04.08-20:11:13] Loading params for BEST_RANDF from RandomForestClassifier_params_2019-04-06_16_28_13.json ...
+[2019.04.08-20:11:13] Start training RandomForestClassifier with {'random_state': 13, 'n_estimators': 300, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': None, 'max_depth': 5, 'criterion': 'entropy', 'bootstrap': False, 'n_jobs': -1} ...
+[2019.04.08-20:12:43] Finish training [89.32s]
+[2019.04.08-20:12:43] Accuracy 0.4577789150460594
+[2019.04.08-20:12:43] Precision 0.23248407643312102
+[2019.04.08-20:12:43] Recall 0.5418875927889714
+[2019.04.08-20:12:43] F1 0.3253740846864056
+[2019.04.08-20:12:43] MSE 0.09700659801118754
+[2019.04.08-20:12:43] AUC 0.49678370764585505
+[2019.04.08-20:12:43] Saving model to RandomForestClassifier_0.0970.pkl ...
+[2019.04.08-20:12:43] Loading params for BEST_XGB from XGBClassifier_params_2019-04-06_16_33_33.json ...
+[2019.04.08-20:12:43] Start training XGBClassifier with {'subsample': 1.0, 'reg_alpha': 0.01, 'random_state': 13, 'n_estimators': 250, 'min_child_weight': 6, 'max_depth': 6, 'learning_rate': 0.0001, 'gamma': 0.4, 'colsample_bytree': 1.0, 'n_jobs': -1} ...
+[2019.04.08-20:12:53] Finish training [9.76s]
+[2019.04.08-20:12:53] Accuracy 0.46545547594677583
+[2019.04.08-20:12:53] Precision 0.23348837209302326
+[2019.04.08-20:12:53] Recall 0.5323435843054083
+[2019.04.08-20:12:53] F1 0.32460394439055934
+[2019.04.08-20:12:53] MSE 0.09417150471258894
+[2019.04.08-20:12:53] AUC 0.4942042876503189
+[2019.04.08-20:12:53] Saving model to XGBClassifier_0.0942.pkl ...
+[2019.04.08-20:12:53] Start training average ensemble 0.50 ADA + 0.50 XGB ...
+[2019.04.08-20:13:05] Finish training average ensemble [11.94s]
+[2019.04.08-20:13:05] Accuracy 0.5335209825997953
+[2019.04.08-20:13:05] Precision 0.23236009732360097
+[2019.04.08-20:13:05] Recall 0.4050901378579003
+[2019.04.08-20:13:05] F1 0.29532276768457677
+[2019.04.08-20:13:05] MSE 0.09296017610834158
+[2019.04.08-20:13:05] AUC 0.49400208260071155
+[2019.04.08-20:13:05] Saving model to VotingClassifier_0.0930.pkl ...
