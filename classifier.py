@@ -4,6 +4,7 @@ from features.pos_tags_features import POSTagFeatures
 from features.sentence_struct_features import SentenceStructureFeatures
 from features.sentence_sentm_features import SentenceSentimentFeatures
 from features.sentence_word_emb import GloVeFeatures
+from features.original_features import OriginalFeatures
 
 from features.originalFeatures import meld_with_original_features
 from features.originalFeatures import column_names as originalfeatures_name
@@ -23,7 +24,7 @@ from time import sleep
 
 def start_server():
     os.popen(
-        'java -mx1524m -cp "stanford-corenlp-full-2018-10-05/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -preload tokenize,ssplit,pos,parse,depparse -status_port 9000 -port 9000 -timeout 300000 &')
+        'java -mx1524m -cp "..\\..\\..\\Desktop\\stanford-corenlp-full-2018-10-05/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -preload tokenize,ssplit,pos,parse,depparse -status_port 9000 -port 9000 -timeout 300000 &')
 
 
 def generate_data(path_to_file, logger):
@@ -44,6 +45,7 @@ def generate_test_data(data, logger, media_path):
     sentiment_extractor = SentenceSentimentFeatures(logger)
     structure_extractor = SentenceStructureFeatures(logger)
     glove_extractor = GloVeFeatures(logger)
+    original_extractor = OriginalFeatures(logger)
 
     features_list = []
     logger.log("Start calculating features ...")
@@ -52,6 +54,7 @@ def generate_test_data(data, logger, media_path):
         crt_sentence = row['postText'][-1]
 
         crt_feats = [row['id']]
+        crt_feats += original_extractor.compute_features_per_entry(row, media_path)
         crt_feats += pos_extractor.compute_features_per_sentence(crt_sentence)
         crt_feats += sentiment_extractor.compute_features_per_sentence(crt_sentence)
         crt_feats += structure_extractor.compute_features_per_sentence(crt_sentence)
@@ -59,13 +62,14 @@ def generate_test_data(data, logger, media_path):
 
         features_list.append(crt_feats)
 
-    image_meta = extract_info(media_path)
-    meld_with_original_features(data, image_meta, features_list)
+    #image_meta = extract_info(media_path)
+    #meld_with_original_features(data, image_meta, features_list)
 
     logger.log("Finish calculating {} features for {} entries".format(
         len(features_list[-1]) - 1, len(features_list)), show_time=True)
 
     colnames = ["ID"]
+    colnames += original_extractor.end_computing_features()
     colnames += pos_extractor.end_computing_features()
     colnames += sentiment_extractor.end_computing_features()
     colnames += structure_extractor.end_computing_features()
@@ -91,7 +95,7 @@ if __name__ == '__main__':
     logger = Logger(show=True, html_output=True, config_file="config.txt")
 
     start_server()
-    sleep(70)
+    sleep(40)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', '-i', type=str)
@@ -101,7 +105,7 @@ if __name__ == '__main__':
 
     data = generate_data(os.path.join(args.input, "instances.jsonl"), logger)
 
-    test_df = generate_test_data(data, logger, os.path.join(args.input, "media"))
+    test_df = generate_test_data(data[:100], logger, os.path.join(args.input, "media"))
     del data
 
     X_test = test_df.iloc[:, 1:].values
