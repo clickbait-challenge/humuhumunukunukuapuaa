@@ -1,6 +1,8 @@
 from nltk.corpus import words
 from nltk.corpus import wordnet
 
+import os
+
 try:
     from PIL import Image
 except ImportError:
@@ -39,8 +41,9 @@ def keyword_count_function(string):
 
 
 class OriginalFeatures():
-    def __init__(self, logger):
+    def __init__(self, logger, media_path):
         self.logger = logger
+        self.media_path = media_path
         self.colnames = ['PostTitleWordsNumber', 'PostTitleCharsNumber',
                          'DiffNoWordsPostTitleAndKeywords', 'DiffNoCharsPostTitleAndKeywords',
                          'RatioNoWordsArticleDescriptionAndPostTitle',
@@ -77,7 +80,8 @@ class OriginalFeatures():
         wc_im = 0
         if data_dict['postMedia']:
             # should be fine even with //
-            s = pytesseract.image_to_string(Image.open(data_dict['postMedia'][0]))
+            s = pytesseract.image_to_string(Image.open(
+                os.path.join(self.media_path, data_dict['postMedia'][0])))
 
             if s:
                 wc_im = word_count_function(s)
