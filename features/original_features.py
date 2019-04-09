@@ -35,7 +35,7 @@ def keyword_count_function(string):
     if string:
         number_of_words = len(string.split(","))
     else:
-        number_of_words = -1
+        number_of_words = 0
 
     return number_of_words
 
@@ -111,11 +111,11 @@ class OriginalFeatures():
 
             # # Difference number of characters post title and article keywords
             # def diff_chars_title_keywords(data):
-            abs(cc_postText - cc_targetKeywords),
+            abs(cc_postText - cc_targetKeywords) if cc_targetKeywords != -1 else cc_postText,
 
             # # Ratio number of words article description and post title
             # def ratio_words_descr_title(data):
-            wc_targetDescription / wc_postText if wc_targetDescription != 0 else -1,
+            wc_targetDescription / wc_postText if wc_targetDescription != -1 else -1,
 
             # # Number of question marks in post title
             # def question_marks_title(data):
@@ -123,19 +123,19 @@ class OriginalFeatures():
 
             # # Number of characters ratio article paragraphs and post title
             # def ratio_paragraphs_title(data):
-            cc_targetParagraphs / cc_postText if cc_targetParagraphs != 0 else -1,
+            cc_targetParagraphs / cc_postText if cc_targetParagraphs != -1 else -1,
 
             # # Number of characters ratio article description and post title
             # def ratio_description_title(data):
-            cc_targetDescription / cc_postText if cc_targetDescription != 0 else -1,
+            cc_targetDescription / cc_postText if cc_targetDescription != -1 else -1,
 
             # # Number of characters ratio article title and post title
             # def ratio_article_title_post_title(data):
-            cc_targetTitle / cc_postText if cc_targetTitle != 0 else -1,
+            cc_targetTitle / cc_postText if cc_targetTitle != -1 else -1,
 
             # # Number of words ratio article title and post title
             # def ratio_words_article_title_post_title(data):
-            wc_targetTitle / wc_postText if wc_targetTitle != 0 else -1,
+            wc_targetTitle / wc_postText if wc_targetTitle != -1 else -1,
 
             # # Ratio words in post image and post title
             # def ratio_words_image_title(data, image_meta):
@@ -155,7 +155,8 @@ class OriginalFeatures():
 
             # # Number of characters ratio article paragraphs and article description
             # def ratio_paragraphs_description(data):
-            cc_targetParagraphs / cc_targetDescription if cc_targetParagraphs * cc_targetDescription != 0 else -1
+            cc_targetParagraphs / cc_targetDescription if (cc_targetParagraphs != -1 and cc_targetDescription != -1)
+            else -1
 
         ] if postText else [
             # # Number of words in post title
@@ -172,7 +173,7 @@ class OriginalFeatures():
 
             # # Difference number of characters post title and article keywords
             # def diff_chars_title_keywords(data):
-            abs(cc_postText - cc_targetKeywords),
+            abs(cc_postText - cc_targetKeywords) if cc_targetKeywords != -1 else cc_postText,
 
             # # Ratio number of words article description and post title
             # def ratio_words_descr_title(data):
