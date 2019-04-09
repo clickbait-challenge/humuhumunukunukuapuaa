@@ -3,7 +3,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 from xgboost import XGBClassifier
 
-from data_preprocess import generate_final_training_dataset
+from data_preprocess import generate_final_training_dataset, get_train_test_scores
 from logger import Logger
 
 
@@ -16,21 +16,6 @@ import pickle as pkl
 import numpy as np
 
 import json
-
-
-def get_train_test_scores(df, test_size):
-
-  X = df.iloc[:, :-2].values
-  y = df.iloc[:, -2].values
-
-  X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 13, 
-    test_size = test_size)
-
-  y_score = np.copy(y_test)
-  y_train = (y_train > 0.5) * 1
-  y_test  = (y_test > 0.5) * 1
-
-  return X_train, y_train, X_test, y_test, y_score
 
 
 def run_model(model, params, X_train, y_train, sample_weight, logger):
@@ -56,7 +41,9 @@ def evaluate_model(model, X_test, y_true, y_score, logger, data_type):
   logger.log("MSE {}".format(mean_squared_error(y_score, y_prob)))
   logger.log("AUC {}".format(roc_auc_score(y_true, y_prob, max_fpr = 0.3)))
 
-  model_filename  = type(model).__name__ + "_" + "{:.4f}".format(mean_squared_error(y_score, y_prob))
+  model_filename  = type(model).__name__ + "_" + str(CBAIT_SAMP_W)
+  model_filename += "_" + "{:.4f}".format(mean_squared_error(y_score, y_prob))
+  model_filename += "_" + logger.get_time_prefix()
   model_filename += ".pkl"
 
   logger.log("Saving model to {} ...".format(model_filename))
@@ -75,8 +62,8 @@ def load_params(model_prefix, data_type, logger):
 
 
 # "small", "large", "custom"
-DATA_TYPE = "custom"
-CBAIT_SAMP_W = 4.0
+DATA_TYPE = "large"
+CBAIT_SAMP_W = 3.5
 
 if __name__ == '__main__':
 
@@ -118,12 +105,13 @@ if __name__ == '__main__':
   ada_model = run_model(ada_model, best_params, X_train, y_train, samples_weights, logger)
   evaluate_model(ada_model, X_test, y_test, y_score, logger, DATA_TYPE)
 
-  
+  '''
   randf_model = RandomForestClassifier()
   best_params = load_params("BEST_RANDF",DATA_TYPE if DATA_TYPE == "small" else "large", logger)
   best_params['n_jobs'] = -1
   randf_model = run_model(randf_model, best_params, X_train, y_train, samples_weights, logger)
   evaluate_model(randf_model, X_test, y_test, y_score, logger, DATA_TYPE)
+  '''
 
 
   xgb_model = XGBClassifier()
@@ -140,7 +128,7 @@ if __name__ == '__main__':
       voting='soft', weights = ensemble_weights, n_jobs = -1)
   else:
     ensemble_names = ["ADA", "XGB"]
-    ensemble_weights = [1/2, 1/2]
+    ensemble_weights = [0.5, 0.5]
     comb_model = VotingClassifier(estimators = [('ADA', ada_model), ('XGB', xgb_model)],
       voting='soft', weights = ensemble_weights, n_jobs = -1)
 
