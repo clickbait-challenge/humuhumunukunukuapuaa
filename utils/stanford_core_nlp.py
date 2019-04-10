@@ -6,9 +6,7 @@ class StanfordCoreNLP():
   def __init__(self, logger):
 
     self.logger = logger
-    self.nlp_options = nlp_options
    
-
   def create_parser(self):
 
     self.parser = CoreNLPParser(url = 'http://localhost:9000/')
