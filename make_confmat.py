@@ -100,7 +100,6 @@ if __name__ == "__main__":
   y_test = (y_test > 0.5) * 1
   logger.log("Loading best large model Ada + XGB...")
   large_model_path = logger.get_model_file(logger.config_dict['LARGE_BEST'], "large")
-  large_model_path = logger.get_model_file('VotingClassifier_4.0_0.0957_2019-04-08_21_05_51.pkl', "large")
   with open(large_model_path, "rb") as fp:
     large_best_model = pkl.load(fp)
 
