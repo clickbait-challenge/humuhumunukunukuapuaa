@@ -1,20 +1,17 @@
 from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier, VotingClassifier
 from sklearn.tree import DecisionTreeClassifier
-
 from xgboost import XGBClassifier
 
-from data_preprocess import generate_final_training_dataset, get_train_test_scores
+from utils.data_preprocess import generate_final_training_dataset, get_train_test_scores
 from logger import Logger
-
 
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
 from sklearn.metrics import roc_auc_score, mean_squared_error
 from sklearn.model_selection import train_test_split
-from sklearn.utils import shuffle
 
 import pickle as pkl
 import numpy as np
-
+import sklearn
 import json
 
 
@@ -34,6 +31,7 @@ def evaluate_model(model, X_test, y_true, y_score, logger, data_type):
   y_prob = model.predict_proba(X_test)
   y_prob = np.array([elem[1] for elem in y_prob])
 
+  logger.log("Scores snippet {}".format(y_prob[:15]))
   logger.log("Accuracy {}".format(accuracy_score(y_true, y_pred)))
   logger.log("Precision {}".format(precision_score(y_true, y_pred)))
   logger.log("Recall {}".format(recall_score(y_true, y_pred)))
@@ -63,7 +61,7 @@ def load_params(model_prefix, data_type, logger):
 
 # "small", "large", "custom"
 DATA_TYPE = "large"
-CBAIT_SAMP_W = 3.5
+CBAIT_SAMP_W = 4
 
 if __name__ == '__main__':
 
@@ -76,7 +74,7 @@ if __name__ == '__main__':
     final_df = generate_final_training_dataset(DATA_TYPE, logger)
 
   X_train, y_train, X_test, y_test, y_score = get_train_test_scores(final_df, 
-    test_size = 0.1 if DATA_TYPE == "small" else 0.2)
+    test_size = 0.1 if DATA_TYPE == "small" else 0.1)
   logger.log("Splitting data in {} train / {} test".format(y_train.shape[0], y_test.shape[0]))
 
   logger.log("Assign {} weight to clickBaits".format(CBAIT_SAMP_W))
@@ -93,7 +91,6 @@ if __name__ == '__main__':
     logger.log("Assign {} weight to custom data".format(2.0))
     samples_weights += [2.0 for _ in y_custom]
 
-
   dect_model = DecisionTreeClassifier()
   best_params = load_params("BEST_DECT", DATA_TYPE if DATA_TYPE == "small" else "large", logger)
   dect_model = run_model(dect_model, best_params, X_train, y_train, samples_weights, logger)
@@ -105,13 +102,11 @@ if __name__ == '__main__':
   ada_model = run_model(ada_model, best_params, X_train, y_train, samples_weights, logger)
   evaluate_model(ada_model, X_test, y_test, y_score, logger, DATA_TYPE)
 
-  '''
   randf_model = RandomForestClassifier()
   best_params = load_params("BEST_RANDF",DATA_TYPE if DATA_TYPE == "small" else "large", logger)
   best_params['n_jobs'] = -1
   randf_model = run_model(randf_model, best_params, X_train, y_train, samples_weights, logger)
   evaluate_model(randf_model, X_test, y_test, y_score, logger, DATA_TYPE)
-  '''
 
 
   xgb_model = XGBClassifier()
@@ -120,10 +115,14 @@ if __name__ == '__main__':
   xgb_model = run_model(xgb_model, best_params, X_train, y_train, samples_weights, logger)
   evaluate_model(xgb_model, X_test, y_test, y_score, logger, DATA_TYPE)
 
+  dect_model  = sklearn.base.clone(dect_model)
+  ada_model   = sklearn.base.clone(ada_model)
+  randf_model = sklearn.base.clone(randf_model)
+  xgb_model   = sklearn.base.clone(xgb_model)
 
   if DATA_TYPE == "small":
     ensemble_names = ["ADA", "RANDF"]
-    ensemble_weights = [1/2, 1/2]
+    ensemble_weights = [0.5, 0.5]
     comb_model = VotingClassifier(estimators = [('ADA', ada_model), ('RANDF', randf_model)],
       voting='soft', weights = ensemble_weights, n_jobs = -1)
   else:
@@ -131,9 +130,10 @@ if __name__ == '__main__':
     ensemble_weights = [0.5, 0.5]
     comb_model = VotingClassifier(estimators = [('ADA', ada_model), ('XGB', xgb_model)],
       voting='soft', weights = ensemble_weights, n_jobs = -1)
+  
 
-  logger.log("Start training average ensemble {:.2f} {} + {:.2f} {} ...".format(
-    ensemble_weights[0], ensemble_names[0], ensemble_weights[1], ensemble_names[1]))
+  logger.log("Start training average ensemble {} with {} ...".format(
+    ensemble_names, ensemble_weights))
   comb_model.fit(X_train, y_train, samples_weights)
   logger.log("Finish training average ensemble", show_time = True)
 
