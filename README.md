@@ -50,11 +50,9 @@ root
 |
 └───data
 |   |
-│   │   small/large/custom_original.csv
-|   |   small/large/custom_train.csv     
+│   │   small-large-custom_original.csv
+|   |   small-large-custom_train.csv     
 │   │   Downworthy.txt
-|   |   sentiment.csv
-│   │   dialog_dataset.csv
 |   |   glove.twitter.27B.100d.magnitude    <b>!</b> needs to be downloaded 
 |   |
 │   └───small     <b>!</b> needs to be downloaded 
@@ -78,7 +76,7 @@ root
 |   |
 │   │   Saved hyperparamaters after randomize grid search for Decision Tree, AdaBoost, Random Forest, XGBoost
 │   |  
-│   │   Saved trained ensemble models as pickle files (NOT all pushed to GitHub due to space issue) 
+│   │   Saved trained simple and ensemble models as pickle files (NOT all pushed to GitHub due to space issue) 
 │   └───
 |
 └───output
