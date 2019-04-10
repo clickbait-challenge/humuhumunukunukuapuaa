@@ -29,7 +29,7 @@ root
 |   feature_imp.py                  computes feature importance after training using information gain for all features apart embeds		
 |   group_imp.py                    computes feature group importance on trained models			
 |   make_confmat.py                 plots confusion matrix for predicted values based on trained models				
-|   logger.py                       logging system for generating folders initial structure and saving application logs to html files
+|   logger.py                       logging system for generating folders initial structure and saving application logs to HTML files
 |   config.txt                      application configuration file 
 |
 └───features   original, POS tags and sentence structure computed using Stanford NLP server, sentence structure features and word embeds
@@ -40,7 +40,7 @@ root
 |   sentence_struct_features.py
 |   sentence_word_emb.py
 |
-└───hyperparams       with randomized grid search class and hyperparameters serach grid values for each classifier
+└───hyperparams       with randomized grid search class and hyperparameters search grid values for each classifier
 |
 └───utils             with the wrapper class for calling Stanford NLP java server and utility reading, splitting and concatenate data
 |
@@ -65,7 +65,7 @@ root
 |
 └───logs
 |   |   Log files in HTML format for 
-|   |   	hyperpars search, training and testing simple and ensembles models, compute importance of features a.s.o
+|   |   	hyperparams search, training and testing simple and ensembles models, compute importance of features a.s.o
 |   └───
 |
 └───models
@@ -76,7 +76,7 @@ root
 |   |
 │   │   Saved hyperparamaters after randomize grid search for Decision Tree, AdaBoost, Random Forest, XGBoost
 │   |  
-│   │   Saved trained ensmbled models as pickle files (NOT all pushed to GitHub due to space issue) 
+│   │   Saved trained ensemble models as pickle files (NOT all pushed to GitHub due to space issue) 
 │   └───
 |
 └───output
@@ -122,8 +122,8 @@ root
 ## Installation :computer:
 The scripts can be run in [Anaconda](https://www.anaconda.com/download/) Windows/Linux environment.
 
-You need to create an Anaconda :snake: `python 3.6` enviroment named `app_nlp`.
-Inside that enviroment some addition packages needs to be installed. Run the following commands inside Anaconda Prompt ⌨:
+You need to create an Anaconda :snake: `python 3.6` environment named `app_nlp`.
+Inside that environment some addition packages needs to be installed. Run the following commands inside Anaconda Prompt ⌨:
 ```shell
 (base) conda create -n app_nlp python=3.6 anaconda
 (base) conda activate app_nlp
@@ -141,7 +141,7 @@ nltk.download('opinion_lexicon')
 nltk.download('wordnet')
 ```
 
-The files downloaded at [Data section](#data) needs to be places in the right folders accroding to the [Project structure](#project-structure).
+The files downloaded at [Data section](#data) needs to be places in the right folders according to the [Project structure](#project-structure).
 
 Moreover, [Stanford CoreNLP `jars`](https://stanfordnlp.github.io/CoreNLP/) needs to be downloaded in order to launch the java server required for running `generate_features.py`.
 
