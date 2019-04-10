@@ -44,7 +44,7 @@ root
 |
 └───utils             with the wrapper class for calling Stanford NLP java server and utility reading, splitting and concatenate data
 |
-└───crawler           JavaScript crwaler for collecting our own <b>custom</b> clickBait tweets
+└───crawler           JavaScript crawler for collecting our own <b>custom</b> clickBait tweets
 |
 └───data
 |   |
@@ -61,7 +61,7 @@ root
 |   |   truth.jsonl
 |   |
 |   └───large     <b>!</b> needs to be downloaded  same layout as <b>small</b>
-|   └───custom    <b>!</b needs to be downloaded  same layout as <b>small</b>
+|   └───custom    <b>!</b> needs to be downloaded  same layout as <b>small</b>
 |
 └───logs
 |   |   Log files in HTML format for 
@@ -126,7 +126,7 @@ You need to create an Anaconda :snake: `python 3.6` enviroment named `app_nlp`.
 Inside that enviroment some addition packages needs to be installed. Run the following commands inside Anaconda Prompt ⌨:
 ```shell
 (base) conda create -n app_nlp python=3.6 anaconda
-(base) conda activate core_ir
+(base) conda activate app_nlp
 (app_nlp) pip install vaderSentiment #vaderSentiment 3.2.1
 (app_nlp) conda install -c anaconda py-xgboost #xgboost 0.8.0 
 (app_nlp) pip install pymagnitude #pymagnitude 0.1.120
@@ -152,4 +152,11 @@ Before running `generate_features.py`, a CoreNLP server needs to be launched fro
 ```shell
 java -mx1024m -cp "stanford-corenlp-full-2018-10-05/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer \\ 
 -preload tokenize,ssplit,pos,parse,depparse -status_port 9000 -port 9000 -timeout 300000
+```
+
+The importance scripts apart the ones that genearates plots or computes feature importances are `generate_features.py` and `run_tests.py`. Both can be runned inside the enviroment created at [Instalation section](#installation) :rocket: :
+```shell
+(base) conda activate app_nlp
+(app_nlp) python generate_features.py
+(app_nlp) python run_tests.py
 ```
