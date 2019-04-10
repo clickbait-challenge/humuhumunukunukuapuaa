@@ -20,5 +20,5 @@
 	"BEST_DECT_L": "DecisionTreeClassifier_params_2019-04-06_15_30_59.json",
 	"BEST_XGB_L": "XGBClassifier_params_2019-04-06_16_33_33.json",
 	"SMALL_BEST": "RandomForestClassifier_0.0423.pkl",
-	"LARGE_BEST": "VotingClassifier_0.0957.pkl",	
+	"LARGE_BEST": "VotingClassifier_0.0957.pkl"	
 }
