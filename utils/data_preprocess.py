@@ -77,6 +77,7 @@ def get_train_test_scores(df, test_size):
   X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 13, 
     test_size = test_size)
 
+
   y_score = np.copy(y_test)
   y_train = (y_train > 0.5) * 1
   y_test  = (y_test > 0.5) * 1

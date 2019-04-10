@@ -17,15 +17,6 @@ class GloVeFeatures():
 
     self.logger.log("Start loading GloVe Twitter pretrained word embeddings ...")
     self.vectors = Magnitude(self.logger.get_data_file(self.logger.config_dict['GLOVE_FILE']))
-
-    '''
-    with open(self.logger.get_data_file(self.logger.config_dict['GLOVE_FILE']), encoding="utf8") as fp:
-      for line in fp:
-        line_content = line.strip().split(' ')
-        vocab_word = line_content[0]
-        word_embed = [float(elem) for elem in line_content[1:]]
-        self.embedding_dict[vocab_word] = word_embed
-    '''
     self.logger.log("Finished loading GloVe", show_time = True)
 
 
@@ -40,12 +31,7 @@ class GloVeFeatures():
     for word in words:
       word_emb = self.vectors.query(word)
       sentence_emb.append(word_emb)
-      #self.embedding_dict.get(word, False)
-      '''
-      if word in self.vectors:
-        sentence_emb.append(word_emb)
-      '''
-
+      
     if sentence_emb == []:
       return [-1 for i in range(len(self.colnames))]
     else:

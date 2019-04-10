@@ -1,18 +1,11 @@
-import matplotlib
-#matplotlib.use("TkAgg")
-
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import precision_score, recall_score
 import pickle as pkl
-import pandas as pd
 import numpy as np
-import os
 
 
-from data_preprocess import generate_final_training_dataset
+from utils.data_preprocess import generate_final_training_dataset
 from logger import Logger
-
 
 
 def plot_confusion_matrix(cm,
@@ -22,39 +15,12 @@ def plot_confusion_matrix(cm,
                           cmap=None,
                           normalize=True):
   """
-    given a sklearn confusion matrix (cm), make a nice plot
-
-    Arguments
-    ---------
-    cm:           confusion matrix from sklearn.metrics.confusion_matrix
-
-    target_names: given classification classes such as [0, 1, 2]
-                  the class names, for example: ['high', 'medium', 'low']
-
-    title:        the text to display at the top of the matrix
-
-    cmap:         the gradient of the values displayed from matplotlib.pyplot.cm
-                  see http://matplotlib.org/examples/color/colormaps_reference.html
-                  plt.get_cmap('jet') or plt.cm.Blues
-
-    normalize:    If False, plot the raw numbers
-                  If True, plot the proportions
-
-    Usage
-    -----
-    plot_confusion_matrix(cm           = cm,                  # confusion matrix created by
-                                                              # sklearn.metrics.confusion_matrix
-                          normalize    = True,                # show proportions
-                          target_names = y_labels_vals,       # list of names of the classes
-                          title        = best_estimator_name) # title of graph
-
-    Citiation
+    Citiation - adapted from:
     ---------
     http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html
 
   """
   import matplotlib.pyplot as plt
-  import numpy as np
   import itertools
 
   if cmat.shape[0] == 2:
@@ -103,6 +69,7 @@ def plot_confusion_matrix(cm,
   plt.savefig(plt_filename, dpi = 120, bbox_inches='tight')
   plt.close()
 
+
 if __name__ == "__main__":
 
   logger = Logger(show = True, html_output = True, config_file = "config.txt")
@@ -122,7 +89,7 @@ if __name__ == "__main__":
   y_pred = small_best_model.predict(X_test)
   cmat = confusion_matrix(y_test, y_pred, labels = [1, 0])
   plot_confusion_matrix(cmat, ["ClickBait", "Not ClickBait"], 
-    os.path.join("output", "small_cmat.jpg"), normalize = False, 
+    logger.get_output_file("small_cmat.jpg"), normalize = False, 
     title = "")
 
   df = generate_final_training_dataset("large", logger)
@@ -140,5 +107,5 @@ if __name__ == "__main__":
   y_pred = large_best_model.predict(X_test)
   cmat = confusion_matrix(y_test, y_pred, labels = [1, 0])
   plot_confusion_matrix(cmat, ["ClickBait", "Not ClickBait"], 
-    os.path.join("output", "large_cmat.jpg"), normalize = False, 
+    logger.get_output_file("large_cmat.jpg"), normalize = False, 
     title = "")

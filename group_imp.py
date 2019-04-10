@@ -9,7 +9,7 @@ from features.original_features import OriginalFeatures
 from features.sentence_word_emb import GloVeFeatures
 
 
-from data_preprocess import generate_final_training_dataset, get_train_test_scores
+from utils.data_preprocess import generate_final_training_dataset, get_train_test_scores
 from logger import Logger
 
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score

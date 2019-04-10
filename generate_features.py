@@ -7,11 +7,12 @@ from tqdm import tqdm
 import pandas as pd
 import traceback
 
-from data_preprocess import generate_data
+from utils.data_preprocess import generate_data
 from logger import Logger
 
 pos_extractor = None
 structure_extractor = None
+
 
 def generate_training_data(dataset, file_to_save, logger):
  

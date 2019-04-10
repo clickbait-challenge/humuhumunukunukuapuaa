@@ -2,7 +2,7 @@ from sklearn.feature_selection import mutual_info_classif
 
 import pandas as pd
 
-from data_preprocess import generate_final_training_dataset
+from utils.data_preprocess import generate_final_training_dataset
 from logger import Logger
 
 if __name__ == '__main__':

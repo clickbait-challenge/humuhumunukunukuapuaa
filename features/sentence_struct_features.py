@@ -1,4 +1,4 @@
-from stanford_core_nlp import StanfordCoreNLP
+from utils.stanford_core_nlp import StanfordCoreNLP
 
 from nltk.corpus import stopwords
 import numpy as np
@@ -20,8 +20,7 @@ class SentenceStructureFeatures():
 
   def _core_nlp_server_init(self):
 
-    corenlp_options = ["-preload", "tokenize,ssplit,depparse", "-timeout", "15000"]
-    self.core_nlp = StanfordCoreNLP(self.logger, corenlp_options)
+    self.core_nlp = StanfordCoreNLP(self.logger)
     self.parser = self.core_nlp.create_parser()
     self.dep_parser = self.core_nlp.create_dependency_parser()
 

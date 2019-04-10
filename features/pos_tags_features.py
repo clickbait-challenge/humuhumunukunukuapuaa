@@ -1,4 +1,4 @@
-from stanford_core_nlp import StanfordCoreNLP
+from utils.stanford_core_nlp import StanfordCoreNLP
 
 import numpy as np
 
@@ -16,8 +16,7 @@ class POSTagFeatures():
 
   def _core_nlp_server_init(self):
 
-    corenlp_options = ["-preload", "tokenize,ssplit,pos", "-timeout", "15000"]
-    self.core_nlp = StanfordCoreNLP(self.logger, corenlp_options)
+    self.core_nlp = StanfordCoreNLP(self.logger)
     self.parser = self.core_nlp.create_parser()
     self.tagger = self.core_nlp.create_pos_tagger()
     

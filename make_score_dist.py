@@ -3,9 +3,10 @@ import seaborn as sns
 import numpy as np
 
 from logger import Logger
-from data_preprocess import generate_data
+from utils.data_preprocess import generate_data
 
 from collections import Counter
+
 
 def plot_scores_distribution(plt_filename, dataset, logger):
 

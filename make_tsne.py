@@ -1,14 +1,12 @@
 from sklearn.manifold import TSNE
 
-#from MulticoreTSNE import MulticoreTSNE as TSNE
-
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 from logger import Logger
-from data_preprocess import generate_data
+from utils.data_preprocess import generate_data
 
 def compute_tsne(original_array, logger):
 
@@ -57,10 +55,4 @@ if __name__ == '__main__':
 	new_array = np.load(logger.get_output_file("TSNE_2019-04-04_03_16_50.npy"))
 	new_array = new_array.tolist()
 	'''
-
-	#tmp = zip(new_array, scores)
-	#tmp = [(arr, s) for arr, s in tmp if s > 0.9]
-
-	#new_array, scores = zip(*tmp)
-
 	plot_tsne(new_array, scores, logger)
