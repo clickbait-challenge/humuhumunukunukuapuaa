@@ -1,7 +1,7 @@
 # :arrow_down: AppliedNLP Paper Reproduction :arrow_down:
 ## ["Detecting Clickbait in Online Social Media: You Won’t Believe How We Did It"](https://arxiv.org/pdf/1710.06699.pdf)
 
-Code for Group 26 python implementation of Applied NLP project IN4325.
+Code for Group 26 python implementation of Applied NLP project IN4325 :tropical_fish:.
 
 Team members:
 
@@ -165,3 +165,9 @@ The importance scripts apart the ones that genearates plots or computes feature 
 (app_nlp) python generate_features.py
 (app_nlp) python run_tests.py
 ```
+
+## TIRA run :trophy:
+
+The output from one of our TIRA submission can be visualized [here](_tira_results/TIRA_output.html).
+
+The results from one of our TIRA submission can be visualized [here](_tira_results/TIRA_results.html).
