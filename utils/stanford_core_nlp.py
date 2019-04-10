@@ -27,4 +27,4 @@ class StanfordCoreNLP():
 
   def close_server(self):
 
-    self.logger("Closing server wrapper")
+    self.logger.log("Closing server wrapper")
