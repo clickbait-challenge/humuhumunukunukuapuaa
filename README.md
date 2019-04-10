@@ -1,7 +1,7 @@
 # :arrow_down: AppliedNLP Paper Reproduction :arrow_down:
 ## ["Detecting Clickbait in Online Social Media: You Won’t Believe How We Did It"](https://arxiv.org/pdf/1710.06699.pdf)
 
-Code for Group 26 python implementation of Applied NLP project IN4325.
+Code for Group 26 python implementation of Applied NLP project IN4325 :tropical_fish:.
 
 Team members:
 
