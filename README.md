@@ -14,6 +14,8 @@ Team members:
 
 For training and testing the models, we used the Clickbait Challenge labeled datasets that can be obtained from the [Clickbait Challenge official site](https://www.clickbait-challenge.org/#data). Moreover, GloVe Twitter trained word embeddings needs to be downloaded from [pymagnitude GitHub page](https://github.com/plasticityai/magnitude). 
 
+Our custom Twitter clickBaits posts can be downloaded from this [link](https://drive.google.com/file/d/1x7vv7VFEw6nMuuLEm7DNo3NkPWA43JGS/view?usp=sharing). 
+
 ## Project structure :open_file_folder:
 
 The project tree is displayed bellow:
@@ -90,6 +92,8 @@ root
     └───
 </pre>
 
+> :exclamation: Do not forget to add the files downloaded in the previous section in the right folders according to the project structure
+
 ## Config file :bookmark_tabs:
 
 ```
@@ -145,6 +149,7 @@ The files downloaded at [Data section](#data) needs to be places in the right fo
 
 Moreover, [Stanford CoreNLP `jars`](https://stanfordnlp.github.io/CoreNLP/) needs to be downloaded in order to launch the java server required for running `generate_features.py`.
 
+Furthermore, tesseract needs to be installed (following this [instructions](https://github.com/tesseract-ocr/tesseract/wiki)) and added to `PATH` enviroment variable.
 
 ## Usage :arrow_forward:
 
@@ -154,7 +159,7 @@ java -mx1024m -cp "stanford-corenlp-full-2018-10-05/*" edu.stanford.nlp.pipeline
 -preload tokenize,ssplit,pos,parse,depparse -status_port 9000 -port 9000 -timeout 300000
 ```
 
-The importance scripts apart the ones that genearates plots or computes feature importances are `generate_features.py` and `run_tests.py`. Both can be runned inside the enviroment created at [Instalation section](#installation) :rocket: :
+The importance scripts apart the ones that genearates plots or computes feature importances are `generate_features.py` and `run_tests.py`. Both can be runned inside the enviroment created at [Installation section](#installation) :rocket: :
 ```shell
 (base) conda activate app_nlp
 (app_nlp) python generate_features.py
